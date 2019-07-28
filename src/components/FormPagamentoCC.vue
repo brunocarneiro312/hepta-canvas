@@ -12,19 +12,49 @@
                 <b-col sm="12" md="6" lg="4">
                     <b-form-group class="text-center">
                         <label for="nome-beneficiario">Nome</label>
-                        <b-input id="nome-beneficiario" placeholder="João Antônio Almeida" class="text-center"></b-input>
+                        <b-input-group>
+                            <b-form-input id="nome-beneficiario"
+                                     placeholder="João Antônio Almeida"
+                                     v-model="formPagamentoCC.informacoesBeneficiario.nome"
+                                     class="text-center">
+                            </b-form-input>
+                            <b-input-group-append>
+                                <i class="fa fa-check fa-fw" v-if="false"></i>
+                                <i class="fa fa-times fa-fw" v-else></i>
+                            </b-input-group-append>
+                        </b-input-group>
+
                     </b-form-group>
                 </b-col>
                 <b-col sm="12" md="6" lg="4">
                     <b-form-group class="text-center">
                         <label for="email-beneficiario">E-mail</label>
-                        <b-input id="email-beneficiario" placeholder="joao.almeida@email.com" class="text-center"></b-input>
+                        <b-input-group>
+                            <b-form-input id="email-beneficiario"
+                                          placeholder="joao.almeida@email.com"
+                                          v-model="formPagamentoCC.informacoesBeneficiario.email"
+                                          class="text-center">
+                            </b-form-input>
+                            <b-input-group-append>
+                                <i class="fa fa-check fa-fw" v-if="false"></i>
+                                <i class="fa fa-times fa-fw" v-else></i>
+                            </b-input-group-append>
+                        </b-input-group>
                     </b-form-group>
                 </b-col>
                 <b-col sm="12" md="6" lg="4">
                     <b-form-group class="text-center">
-                        <label for="telefone-beneficiario">Telefone</label>
-                        <b-input id="telefone-beneficiario" placeholder="(00) 00000-0000" class="text-center"></b-input>
+                        <label for="email-beneficiario">Telefone</label>
+                        <b-input-group>
+                            <b-form-input id="telefone-beneficiario"
+                                     placeholder="(00) 00000-0000"
+                                     v-model="formPagamentoCC.informacoesBeneficiario.telefone"
+                                     class="text-center"></b-form-input>
+                            <b-input-group-append>
+                                <i class="fa fa-check fa-fw" v-if="false"></i>
+                                <i class="fa fa-times fa-fw" v-else></i>
+                            </b-input-group-append>
+                        </b-input-group>
                     </b-form-group>
                 </b-col>
             </b-row>
@@ -41,39 +71,81 @@
                     <b-row>
                         <b-col cols="12" md="6">
                             <b-form-group class="text-center">
-                                <label for="numero-cartao-beneficiario">Número do Cartão</label>
-                                <b-input id="numero-cartao-beneficiario" placeholder="0000 0000 0000 0000" class="text-center font-inconsolata"></b-input>
+                                <label for="email-beneficiario">Número do Cartão</label>
+                                <b-input-group>
+                                    <b-form-input id="numero-cartao-beneficiario"
+                                             placeholder="0000 0000 0000 0000"
+                                             v-model="formPagamentoCC.dadosCartaoCredito.numeroCartao"
+                                             class="text-center font-inconsolata"></b-form-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" md="6">
                             <b-form-group class="text-center">
                                 <label for="nome-cartao-beneficiario">Nome no Cartão</label>
-                                <b-input id="nome-cartao-beneficiario" placeholder="José Antônio Almeida" class="text-center"></b-input>
+                                <b-input-group>
+                                    <b-form-input id="nome-cartao-beneficiario"
+                                             placeholder="José Antônio Almeida"
+                                             v-model="formPagamentoCC.dadosCartaoCredito.nomeImpresso"
+                                             class="text-center"></b-form-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                     </b-row>
                     <b-row>
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
-                                <label for="validade-cartao-beneficiario">Validade</label>
-                                <b-input id="validade-cartao-beneficiario" placeholder="00/0000" class="text-center font-inconsolata"></b-input>
+                                <label for="nome-cartao-beneficiario">Validade</label>
+                                <b-input-group>
+                                    <b-form-input id="validade-cartao-beneficiario"
+                                             placeholder="00/0000"
+                                             v-model="formPagamentoCC.dadosCartaoCredito.validade"
+                                             class="text-center font-inconsolata"></b-form-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
-                                <label for="cvc-cartao-beneficiario">CVC</label>
-                                <b-input id="cvc-cartao-beneficiario" placeholder="000" class="text-center font-inconsolata"></b-input>
+                                <label for="nome-cartao-beneficiario">CVC</label>
+                                <b-input-group>
+                                    <b-input id="cvc-cartao-beneficiario"
+                                             placeholder="000"
+                                             v-model="formPagamentoCC.dadosCartaoCredito.cvc"
+                                             class="text-center font-inconsolata"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" md="6">
                             <b-form-group class="text-center">
-                                <label for="cpf-cartao-beneficiario">CPF do Titular</label>
-                                <b-input id="cpf-cartao-beneficiario" placeholder="000.000.000-00" class="text-center"></b-input>
+                                <label for="nome-cartao-beneficiario">CPF do Titular</label>
+                                <b-input-group>
+                                    <b-input id="cpf-cartao-beneficiario"
+                                             placeholder="000.000.000-00"
+                                             v-model="formPagamentoCC.dadosCartaoCredito.cpfTitular"
+                                             class="text-center"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
-                    </b-row>
-                    <b-row>
-
                     </b-row>
                 </b-col>
             </b-row>
@@ -90,40 +162,94 @@
                     <b-row>
                         <b-col md="2">
                             <b-form-group class="text-center">
-                                <label for="cep-beneficiario">CEP</label>
-                                <b-input id="cep-beneficiario" placeholder="00000-000" class="text-center"></b-input>
+                                <label for="nome-cartao-beneficiario">CEP</label>
+                                <b-input-group>
+                                    <b-input id="cep-beneficiario"
+                                             placeholder="00000-000"
+                                             v-model="formPagamentoCC.endereco.cep"
+                                             class="text-center"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                         <b-col md="4">
                             <b-form-group class="text-center">
-                                <label for="logradouro-beneficiario">Logradouro</label>
-                                <b-input id="logradouro-beneficiario" placeholder="SQN 312 BL K" class="text-center"></b-input>
+                                <label for="nome-cartao-beneficiario">Logradouro</label>
+                                <b-input-group>
+                                    <b-input id="logradouro-beneficiario"
+                                             placeholder="SQN 312 BL K"
+                                             v-model="formPagamentoCC.endereco.logradouro"
+                                             class="text-center"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                         <b-col sm="8" md="4">
                             <b-form-group class="text-center">
-                                <label for="bairro-beneficiario">Bairro</label>
-                                <b-input id="endereco-beneficiario" placeholder="Asa Norte" class="text-center"></b-input>
+                                <label for="nome-cartao-beneficiario">Bairro</label>
+                                <b-input-group>
+                                    <b-input id="endereco-beneficiario"
+                                             placeholder="Asa Norte"
+                                             v-model="formPagamentoCC.endereco.bairro"
+                                             class="text-center"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                         <b-col sm="4" md="2">
                             <b-form-group class="text-center">
-                                <label for="uf-beneficiario">UF</label>
-                                <b-input id="uf-beneficiario" placeholder="DF" class="text-center"></b-input>
+                                <label for="nome-cartao-beneficiario">UF</label>
+                                <b-input-group>
+                                    <b-input id="uf-beneficiario"
+                                             placeholder="DF"
+                                             v-model="formPagamentoCC.endereco.uf"
+                                             class="text-center"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                     </b-row>
                     <b-row>
                         <b-col sm="8" md="3" offset-md="3">
                             <b-form-group class="text-center">
-                                <label for="localidade-beneficiario">Cidade</label>
-                                <b-input id="localidade-beneficiario" placeholder="Brasília" class="text-center"></b-input>
+                                <label for="nome-cartao-beneficiario">Cidade</label>
+                                <b-input-group>
+                                    <b-input id="localidade-beneficiario"
+                                             placeholder="Brasília"
+                                             v-model="formPagamentoCC.endereco.cidade"
+                                             class="text-center"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                         <b-col sm="4" md="3">
                             <b-form-group class="text-center">
-                                <label for="complemento-beneficiario">Complemento</label>
-                                <b-input id="logradouro-beneficiario" placeholder="102" class="text-center"></b-input>
+                                <label for="nome-cartao-beneficiario">Complemento</label>
+                                <b-input-group>
+                                    <b-input id="logradouro-beneficiario"
+                                             placeholder="102"
+                                             v-model="formPagamentoCC.endereco.complemento"
+                                             class="text-center"></b-input>
+                                    <b-input-group-append>
+                                        <i class="fa fa-check fa-fw" v-if="false"></i>
+                                        <i class="fa fa-times fa-fw" v-else></i>
+                                    </b-input-group-append>
+                                </b-input-group>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -145,26 +271,34 @@
 <script>
     export default {
         name: "FormPagamentoCC",
-        methods: {
-            rippleEffect(e) {
-
-                var target = e.target;
-                var rect = target.getBoundingClientRect();
-                var ripple = target.querySelector('.ripple');
-
-                // $(ripple).remove();
-
-                ripple = document.createElement('span');
-                ripple.className = 'ripple';
-                ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
-                target.appendChild(ripple);
-                var top = e.pageY - rect.top - ripple.offsetHeight / 2 -  document.body.scrollTop;
-                var left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
-                ripple.style.top = top + 'px';
-                ripple.style.left = left + 'px';
-                return false;
-
+        data: function() {
+            return {
+                formPagamentoCC: {
+                    informacoesBeneficiario: {
+                        nome: undefined,
+                        email: undefined,
+                        telefone: undefined,
+                    },
+                    dadosCartaoCredito: {
+                        numeroCartao: undefined,
+                        validade: undefined,
+                        cvc: undefined,
+                        nomeImpresso: undefined,
+                        cpfTitular: undefined
+                    },
+                    endereco: {
+                        cep: undefined,
+                        logradouro: undefined,
+                        bairro: undefined,
+                        uf: undefined,
+                        cidade: undefined,
+                        complemento: undefined
+                    }
+                }
             }
+        },
+        methods: {
+
         }
     }
 </script>
@@ -175,13 +309,8 @@
     }
     input.form-control {
         border-radius: 0;
-        height: 34px;
-        width: 100%;
-        border: 1px solid transparent;
-        border-top: none;
-        border-bottom: 1px solid #DDD;
-        box-shadow: inset 0 1px 2px rgba(0,0,0,.29), 0 -1px 1px #FFF, 0 1px 0 #FFF;
-        padding: 25px;
+        /*box-shadow: inset 0 1px 1px #ddd;*/
+        border-right: 0;
     }
     label {
         text-transform: uppercase;
