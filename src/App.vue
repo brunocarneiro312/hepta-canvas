@@ -1,28 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <br>
+    <FormPagamentoCC></FormPagamentoCC>
+    <br>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import './assets/css/global.css';
+import 'font-awesome/css/font-awesome.css';
+
+import FormPagamentoCC from "./components/FormPagamentoCC";
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    FormPagamentoCC
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
 }
 </style>
