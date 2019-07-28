@@ -1,16 +1,14 @@
 <template>
     <b-container class="shadow-sm p-3 bg-white">
         <div class="p-4">
-            <b-row>
-                <b-col>
-                    <h4 class="text-uppercase text-muted font-raleway font-weight-bold">Informações do beneficiário</h4>
-                </b-col>
-                <b-col class="text-right text-muted">
-                    <i class="fa fa-file-o fa-lg"></i>
+            <b-row class="mt-4">
+                <b-col class="text-center">
+                    <h3 class="text-uppercase text-muted font-raleway font-weight-bold">Informações do beneficiário</h3>
                 </b-col>
             </b-row>
-            <hr>
-            <b-row>
+            <hr class="shadow-down">
+            <br>
+            <b-row class="mb-4">
                 <b-col sm="12" md="6" lg="4">
                     <b-form-group class="text-center">
                         <label for="nome-beneficiario">Nome</label>
@@ -32,21 +30,19 @@
             </b-row>
             <br>
             <b-row>
-                <b-col>
-                    <h4 class="text-uppercase text-muted font-raleway font-weight-bold">Dados do Cartão de Crédito</h4>
-                </b-col>
-                <b-col class="text-right text-muted">
-                    <i class="fa fa-credit-card fa-lg"></i>
+                <b-col class="text-center">
+                    <h3 class="text-uppercase text-muted font-raleway font-weight-bold">Dados do Cartão de Crédito</h3>
                 </b-col>
             </b-row>
-            <hr>
-            <b-row>
+            <hr class="shadow-down">
+            <br>
+            <b-row class="mb-4">
                 <b-col>
                     <b-row>
                         <b-col cols="12" md="6">
                             <b-form-group class="text-center">
                                 <label for="numero-cartao-beneficiario">Número do Cartão</label>
-                                <b-input id="numero-cartao-beneficiario" placeholder="0000 0000 0000 0000" class="text-center"></b-input>
+                                <b-input id="numero-cartao-beneficiario" placeholder="0000 0000 0000 0000" class="text-center font-inconsolata"></b-input>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" md="6">
@@ -60,13 +56,13 @@
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
                                 <label for="validade-cartao-beneficiario">Validade</label>
-                                <b-input id="validade-cartao-beneficiario" placeholder="00/0000" class="text-center"></b-input>
+                                <b-input id="validade-cartao-beneficiario" placeholder="00/0000" class="text-center font-inconsolata"></b-input>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
                                 <label for="cvc-cartao-beneficiario">CVC</label>
-                                <b-input id="cvc-cartao-beneficiario" placeholder="000" class="text-center"></b-input>
+                                <b-input id="cvc-cartao-beneficiario" placeholder="000" class="text-center font-inconsolata"></b-input>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" md="6">
@@ -83,14 +79,12 @@
             </b-row>
             <br>
             <b-row>
-                <b-col>
-                    <h4 class="text-uppercase text-muted font-raleway font-weight-bold">Endereço</h4>
-                </b-col>
-                <b-col class="text-right text-muted">
-                    <i class="fa fa-home fa-lg"></i>
+                <b-col class="text-center">
+                    <h3 class="text-uppercase text-muted font-raleway font-weight-bold">Endereço</h3>
                 </b-col>
             </b-row>
-            <hr>
+            <hr class="shadow-down">
+            <br>
             <b-row>
                 <b-col>
                     <b-row>
@@ -135,11 +129,11 @@
                     </b-row>
                 </b-col>
             </b-row>
-            <hr>
             <br>
+            <hr>
             <b-row>
-                <b-col md="4" offset-md="8" class="text-right">
-                    <b-btn variant="success" class="btn-lg" block>
+                <b-col cols="12" md="3" offset-md="9" class="text-right">
+                    <b-btn variant="success" class="btn-lg font-condensed" block>
                         Confirmar <i class="fa fa-check fa-fw"></i>
                     </b-btn>
                 </b-col>
@@ -150,7 +144,28 @@
 
 <script>
     export default {
-        name: "FormPagamentoCC"
+        name: "FormPagamentoCC",
+        methods: {
+            rippleEffect(e) {
+
+                var target = e.target;
+                var rect = target.getBoundingClientRect();
+                var ripple = target.querySelector('.ripple');
+
+                // $(ripple).remove();
+
+                ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
+                target.appendChild(ripple);
+                var top = e.pageY - rect.top - ripple.offsetHeight / 2 -  document.body.scrollTop;
+                var left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
+                ripple.style.top = top + 'px';
+                ripple.style.left = left + 'px';
+                return false;
+
+            }
+        }
     }
 </script>
 
@@ -178,6 +193,28 @@
         border: 1px solid #ddd;
     }
     .btn {
-        border-radius: 0;
+        text-transform: uppercase;
+    }
+    .btn:hover {
+        text-transform: uppercase;
+        box-shadow: 0 3px 3px 1px #ddd;
+    }
+    .shadow-up {
+        border:none;
+        height: 20px;
+        height: 50px;
+        box-shadow: 0 -3px 3px -3px #ddd;
+        margin: 15px auto 0;
+    }
+    .shadow-down {
+        border-bottom:1px dashed #ddd;
+        border-top: 0;
+        height: 20px;
+        height: 50px;
+        /*box-shadow: 0 3px 3px -3px #ddd;*/
+        margin: -35px auto 0;
+    }
+    h3 {
+        color: rgba(0, 0, 0, .25) !important;
     }
 </style>

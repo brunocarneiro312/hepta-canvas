@@ -13,3 +13,9 @@
 .font-quicksand {
     font-family: 'Quicksand', sans-serif;
 }
+.font-inconsolata {
+    font-family: 'Inconsolata', monospace;
+}
+body {
+    background: #f5f5f5;
+}
