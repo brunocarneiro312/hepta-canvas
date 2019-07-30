@@ -8,22 +8,34 @@
             </b-row>
             <hr class="shadow-down">
             <br>
+            <b-row>
+                <b-col>
+                    {{ formPagamentoCC.validations.informacoesBeneficiario.nome }}
+                </b-col>
+            </b-row>
             <b-row class="mb-4">
                 <b-col sm="12" md="6" lg="4">
                     <b-form-group class="text-center">
                         <label for="nome-beneficiario">Nome</label>
                         <b-input-group>
                             <b-form-input id="nome-beneficiario"
-                                     placeholder="João Antônio Almeida"
-                                     v-model="formPagamentoCC.informacoesBeneficiario.nome"
-                                     class="text-center">
+                                          placeholder="João Antônio Almeida"
+                                          v-model="formPagamentoCC.informacoesBeneficiario.nome"
+                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.nome, 'nome-beneficiario')"
+                                          @focus="setDirty"
+                                          autocomplete="new-password"
+                                          class="text-center">
                             </b-form-input>
                             <b-input-group-append>
-                                <i class="fa fa-check fa-fw" v-if="false"></i>
-                                <i class="fa fa-times fa-fw" v-else></i>
+                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.nome.dirty">
+                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioNomeValido"></i>
+                                    <i class="fa fa-times fa-fw red" v-else></i>
+                                </div>
+                                <div v-else>
+                                    <i class="fa fa-exclamation-triangle fa-fw"></i>
+                                </div>
                             </b-input-group-append>
                         </b-input-group>
-
                     </b-form-group>
                 </b-col>
                 <b-col sm="12" md="6" lg="4">
@@ -33,26 +45,40 @@
                             <b-form-input id="email-beneficiario"
                                           placeholder="joao.almeida@email.com"
                                           v-model="formPagamentoCC.informacoesBeneficiario.email"
+                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"
+                                          @focus="setDirty"
                                           class="text-center">
                             </b-form-input>
                             <b-input-group-append>
-                                <i class="fa fa-check fa-fw" v-if="false"></i>
-                                <i class="fa fa-times fa-fw" v-else></i>
+                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.email.dirty">
+                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioEmailValido"></i>
+                                    <i class="fa fa-times fa-fw red" v-else></i>
+                                </div>
+                                <div v-else>
+                                    <i class="fa fa-exclamation-triangle fa-fw"></i>
+                                </div>
                             </b-input-group-append>
                         </b-input-group>
                     </b-form-group>
                 </b-col>
                 <b-col sm="12" md="6" lg="4">
                     <b-form-group class="text-center">
-                        <label for="email-beneficiario">Telefone</label>
+                        <label for="telefone-beneficiario">Telefone</label>
                         <b-input-group>
                             <b-form-input id="telefone-beneficiario"
-                                     placeholder="(00) 00000-0000"
-                                     v-model="formPagamentoCC.informacoesBeneficiario.telefone"
-                                     class="text-center"></b-form-input>
+                                          placeholder="(00) 00000-0000"
+                                          v-model="formPagamentoCC.informacoesBeneficiario.telefone"
+                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.telefone, 'telefone-beneficiario')"
+                                          @focus="setDirty"
+                                          class="text-center"></b-form-input>
                             <b-input-group-append>
-                                <i class="fa fa-check fa-fw" v-if="false"></i>
-                                <i class="fa fa-times fa-fw" v-else></i>
+                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty">
+                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioTelefoneValido"></i>
+                                    <i class="fa fa-times fa-fw red" v-else></i>
+                                </div>
+                                <div v-else>
+                                    <i class="fa fa-exclamation-triangle fa-fw"></i>
+                                </div>
                             </b-input-group-append>
                         </b-input-group>
                     </b-form-group>
@@ -71,12 +97,12 @@
                     <b-row>
                         <b-col cols="12" md="6">
                             <b-form-group class="text-center">
-                                <label for="email-beneficiario">Número do Cartão</label>
+                                <label for="numero-cartao-beneficiario">Número do Cartão</label>
                                 <b-input-group>
                                     <b-form-input id="numero-cartao-beneficiario"
-                                             placeholder="0000 0000 0000 0000"
-                                             v-model="formPagamentoCC.dadosCartaoCredito.numeroCartao"
-                                             class="text-center font-inconsolata"></b-form-input>
+                                                  placeholder="0000 0000 0000 0000"
+                                                  v-model="formPagamentoCC.dadosCartaoCredito.numeroCartao"
+                                                  class="text-center font-inconsolata"></b-form-input>
                                     <b-input-group-append>
                                         <i class="fa fa-check fa-fw" v-if="false"></i>
                                         <i class="fa fa-times fa-fw" v-else></i>
@@ -89,9 +115,9 @@
                                 <label for="nome-cartao-beneficiario">Nome no Cartão</label>
                                 <b-input-group>
                                     <b-form-input id="nome-cartao-beneficiario"
-                                             placeholder="José Antônio Almeida"
-                                             v-model="formPagamentoCC.dadosCartaoCredito.nomeImpresso"
-                                             class="text-center"></b-form-input>
+                                                  placeholder="José Antônio Almeida"
+                                                  v-model="formPagamentoCC.dadosCartaoCredito.nomeImpresso"
+                                                  class="text-center"></b-form-input>
                                     <b-input-group-append>
                                         <i class="fa fa-check fa-fw" v-if="false"></i>
                                         <i class="fa fa-times fa-fw" v-else></i>
@@ -103,12 +129,12 @@
                     <b-row>
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">Validade</label>
+                                <label for="validade-cartao-beneficiario">Validade</label>
                                 <b-input-group>
                                     <b-form-input id="validade-cartao-beneficiario"
-                                             placeholder="00/0000"
-                                             v-model="formPagamentoCC.dadosCartaoCredito.validade"
-                                             class="text-center font-inconsolata"></b-form-input>
+                                                  placeholder="00/0000"
+                                                  v-model="formPagamentoCC.dadosCartaoCredito.validade"
+                                                  class="text-center font-inconsolata"></b-form-input>
                                     <b-input-group-append>
                                         <i class="fa fa-check fa-fw" v-if="false"></i>
                                         <i class="fa fa-times fa-fw" v-else></i>
@@ -118,7 +144,7 @@
                         </b-col>
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">CVC</label>
+                                <label for="cvc-cartao-beneficiario">CVC</label>
                                 <b-input-group>
                                     <b-input id="cvc-cartao-beneficiario"
                                              placeholder="000"
@@ -133,7 +159,7 @@
                         </b-col>
                         <b-col cols="12" md="6">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">CPF do Titular</label>
+                                <label for="cpf-cartao-beneficiario">CPF do Titular</label>
                                 <b-input-group>
                                     <b-input id="cpf-cartao-beneficiario"
                                              placeholder="000.000.000-00"
@@ -162,7 +188,7 @@
                     <b-row>
                         <b-col md="2">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">CEP</label>
+                                <label for="cep-beneficiario">CEP</label>
                                 <b-input-group>
                                     <b-input id="cep-beneficiario"
                                              placeholder="00000-000"
@@ -177,7 +203,7 @@
                         </b-col>
                         <b-col md="4">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">Logradouro</label>
+                                <label for="logradouro-beneficiario">Logradouro</label>
                                 <b-input-group>
                                     <b-input id="logradouro-beneficiario"
                                              placeholder="SQN 312 BL K"
@@ -192,9 +218,9 @@
                         </b-col>
                         <b-col sm="8" md="4">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">Bairro</label>
+                                <label for="bairro-beneficiario">Bairro</label>
                                 <b-input-group>
-                                    <b-input id="endereco-beneficiario"
+                                    <b-input id="bairro-beneficiario"
                                              placeholder="Asa Norte"
                                              v-model="formPagamentoCC.endereco.bairro"
                                              class="text-center"></b-input>
@@ -207,7 +233,7 @@
                         </b-col>
                         <b-col sm="4" md="2">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">UF</label>
+                                <label for="uf-beneficiario">UF</label>
                                 <b-input-group>
                                     <b-input id="uf-beneficiario"
                                              placeholder="DF"
@@ -224,7 +250,7 @@
                     <b-row>
                         <b-col sm="8" md="3" offset-md="3">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">Cidade</label>
+                                <label for="localidade-beneficiario">Cidade</label>
                                 <b-input-group>
                                     <b-input id="localidade-beneficiario"
                                              placeholder="Brasília"
@@ -239,9 +265,9 @@
                         </b-col>
                         <b-col sm="4" md="3">
                             <b-form-group class="text-center">
-                                <label for="nome-cartao-beneficiario">Complemento</label>
+                                <label for="complemento-beneficiario">Complemento</label>
                                 <b-input-group>
-                                    <b-input id="logradouro-beneficiario"
+                                    <b-input id="complemento-beneficiario"
                                              placeholder="102"
                                              v-model="formPagamentoCC.endereco.complemento"
                                              class="text-center"></b-input>
@@ -273,6 +299,7 @@
         name: "FormPagamentoCC",
         data: function() {
             return {
+                // Formulário de pagamento
                 formPagamentoCC: {
                     informacoesBeneficiario: {
                         nome: undefined,
@@ -293,12 +320,173 @@
                         uf: undefined,
                         cidade: undefined,
                         complemento: undefined
+                    },
+                    validations: {
+                        informacoesBeneficiario: {
+                            nome: {
+                                dirty: false,
+                                valid: false
+                            },
+                            email: {
+                                dirty: false,
+                                valid: false
+                            },
+                            telefone: {
+                                dirty: false,
+                                valid: false
+                            }
+                        },
+                        dadosCartaoCredito: {
+                            numeroCartao: {
+                                dirty: false,
+                                valid: false
+                            },
+                            validade: {
+                                dirty: false,
+                                valid: false
+                            },
+                            cvc: {
+                                dirty: false,
+                                valid: false
+                            },
+                            nomeImpresso: {
+                                dirty: false,
+                                valid: false
+                            },
+                            cpfTitular: {
+                                dirty: false,
+                                valid: false
+                            }
+                        },
+                        endereco: {
+                            cep: {
+                                dirty: false,
+                                valid: false
+                            },
+                            logradouro: {
+                                dirty: false,
+                                valid: false
+                            },
+                            bairro: {
+                                dirty: false,
+                                valid: false
+                            },
+                            uf: {
+                                dirty: false,
+                                valid: false
+                            },
+                            cidade: {
+                                dirty: false,
+                                valid: false
+                            },
+                            complemento: {
+                                dirty: false,
+                                valid: false
+                            }
+                        },
                     }
-                }
+                },
             }
         },
         methods: {
+            /**
+             * -------------------------------------------------
+             * Seta o campo como 'dirty' ao receber focus.
+             * O campo é setado através do ID do elemento da DOM
+             * -------------------------------------------------
+             */
+            setDirty(event) {
+                switch (event.target.id) {
+                    case 'nome-beneficiario':
+                        this.formPagamentoCC.validations.informacoesBeneficiario.nome.dirty = true; break;
+                    case 'email-beneficiario':
+                        this.formPagamentoCC.validations.informacoesBeneficiario.email.dirty = true; break;
+                    case 'telefone-beneficiario':
+                        this.formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty = true; break;
+                }
+            },
 
+            /**
+             * -----------------------------------------------------
+             * Verifica se um campo encontra-se no estado 'dirty'.
+             * A verificação é dada através do ID do elemento da DOM
+             * -----------------------------------------------------
+             */
+            isDirty(event) {
+                // switch (event.target.id) {
+                //     case 'nome-beneficiario':
+                //         return this.formPagamentoCC.validations.informacoesBeneficiario.nome.dirty;
+                // }
+            },
+
+            setFormClass(form, formElementId) {
+                if (form.dirty) {
+                    if (form.valid) {
+                        document.querySelector(`#${formElementId}`).classList.remove('red');
+                        document.querySelector(`#${formElementId}`).classList.add('green');
+                    }
+                    else {
+                        document.querySelector(`#${formElementId}`).classList.remove('green');
+                        document.querySelector(`#${formElementId}`).classList.add('red');
+                    }
+                }
+                else {
+                    document.querySelector(`#${formElementId}`).classList.remove('red');
+                    document.querySelector(`#${formElementId}`).classList.remove('green');
+                }
+            },
+
+            /**
+             * ------------------------------
+             * Verifica se o nome está válido
+             * ------------------------------
+             */
+            isNomeBeneficiarioValid() {
+                return this.formPagamentoCC.validations.informacoesBeneficiario.nome.valid;
+            },
+            /**
+             * -------------------------------
+             * Verifica se o email está válido
+             * -------------------------------
+             */
+            isEmailBeneficiarioValid() {
+                return this.formPagamentoCC.validations.informacoesBeneficiario.email.valid;
+            },
+            /**
+             * ----------------------------------
+             * Verifica se o telefone está válido
+             * ----------------------------------
+             */
+            isTelefoneBeneficiarioValid() {
+                return this.formPagamentoCC.validations.informacoesBeneficiario.telefone.valid;
+            },
+        },
+        computed: {
+            // Verifica se o nome está válido
+            isBeneficiarioNomeValido: function() {
+                let isValid = this.formPagamentoCC.informacoesBeneficiario.nome
+                    && this.formPagamentoCC.informacoesBeneficiario.nome.length > 0
+                    && this.formPagamentoCC.informacoesBeneficiario.nome.length < 50;
+                this.formPagamentoCC.validations.informacoesBeneficiario.nome.valid = isValid;
+                return isValid;
+            },
+            // Verifica se o email está válido
+            isBeneficiarioEmailValido: function () {
+                const regexpEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                let isValid = this.formPagamentoCC.informacoesBeneficiario.email
+                    && this.formPagamentoCC.informacoesBeneficiario.email.length > 0
+                    && this.formPagamentoCC.informacoesBeneficiario.email.length < 100
+                    && regexpEmail.test(this.formPagamentoCC.informacoesBeneficiario.email);
+                this.formPagamentoCC.validations.informacoesBeneficiario.email.valid = isValid;
+                return isValid;
+            },
+            isBeneficiarioTelefoneValido: function () {
+                let isValid = this.formPagamentoCC.informacoesBeneficiario.telefone
+                    && this.formPagamentoCC.informacoesBeneficiario.telefone.length > 0
+                    && this.formPagamentoCC.informacoesBeneficiario.telefone.length < 12;
+                this.formPagamentoCC.validations.informacoesBeneficiario.telefone.valid = isValid;
+                return isValid;
+            }
         }
     }
 </script>
@@ -311,6 +499,7 @@
         border-radius: 0;
         /*box-shadow: inset 0 1px 1px #ddd;*/
         border-right: 0;
+        color: black;
     }
     label {
         text-transform: uppercase;
@@ -345,5 +534,11 @@
     }
     h3 {
         color: rgba(0, 0, 0, .25) !important;
+    }
+    .red {
+        color: firebrick;
+    }
+    .green {
+        color: darkgreen;
     }
 </style>

@@ -34,6 +34,20 @@ body {
     border: 1px solid rgb(128, 189, 255);
     border-left: 0;
 }
+.form-control.red {
+    border: 1px solid firebrick;
+}
+.form-control.green + .input-group-append {
+    border: 1px solid darkgreen;
+    border-left: 0;
+}
+.form-control.green {
+    border: 1px solid darkgreen;
+}
+.form-control.red + .input-group-append {
+    border: 1px solid firebrick;
+    border-left: 0;
+}
 .input-group-text {
     border-radius: 0 !important;
     background: transparent;
@@ -48,4 +62,7 @@ body {
 }
 .input-group-append i {
     margin-top: 10px;
+}
+.tiny-text {
+    font-size: 0.85em;
 }
