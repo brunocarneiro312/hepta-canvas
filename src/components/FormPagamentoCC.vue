@@ -604,39 +604,39 @@
                 let isValid = this.formPagamentoCC.endereco.cep
                     && this.formPagamentoCC.endereco.cep.length > 0
                     && this.formPagamentoCC.endereco.cep.length < 11;
-                this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.valid = isValid;
+                this.formPagamentoCC.validations.endereco.cep.valid = isValid;
                 return isValid;
             },
             isEnderecoLogradouroValido: function() {
                 let isValid = this.formPagamentoCC.endereco.logradouro
                     && this.formPagamentoCC.endereco.logradouro.length > 0
                     && this.formPagamentoCC.endereco.logradouro.length < 100;
-                this.formPagamentoCC.validations.dadosCartaoCredito.logradouro.valid = isValid;
+                this.formPagamentoCC.validations.endereco.logradouro.valid = isValid;
                 return isValid;
             },
             isEnderecoBairroValido: function() {
                 let isValid = this.formPagamentoCC.endereco.bairro
                     && this.formPagamentoCC.endereco.bairro.length > 0
                     && this.formPagamentoCC.endereco.bairro.length < 100;
-                this.formPagamentoCC.validations.dadosCartaoCredito.bairro.valid = isValid;
+                this.formPagamentoCC.validations.endereco.bairro.valid = isValid;
                 return isValid;
             },
             isEnderecoUFValido: function() {
                 let isValid = this.formPagamentoCC.endereco.uf
                     && this.formPagamentoCC.endereco.uf.length > 0
                     && this.formPagamentoCC.endereco.uf.length < 100;
-                this.formPagamentoCC.validations.dadosCartaoCredito.uf.valid = isValid;
+                this.formPagamentoCC.validations.endereco.uf.valid = isValid;
                 return isValid;
             },
             isEnderecoCidadeValido: function() {
                 let isValid = this.formPagamentoCC.endereco.cidade
                     && this.formPagamentoCC.endereco.cidade.length > 0
                     && this.formPagamentoCC.endereco.cidade.length < 100;
-                this.formPagamentoCC.validations.dadosCartaoCredito.cidade.valid = isValid;
+                this.formPagamentoCC.validations.endereco.cidade.valid = isValid;
                 return isValid;
             },
             isEnderecoComplementoValido: function () {
-                this.formPagamentoCC.validations.dadosCartaoCredito.complemento.valid = true;
+                this.formPagamentoCC.validations.endereco.complemento.valid = true;
                 return true;
             }
         }
