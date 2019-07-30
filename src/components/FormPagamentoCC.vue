@@ -596,16 +596,15 @@
             },
             isCPFCartaoCreditoValido: function() {
                 let isValid = this.formPagamentoCC.dadosCartaoCredito.cpfTitular
-                    && this.formPagamentoCC.dadosCartaoCredito.cpfTitular.length > 0
-                    && this.formPagamentoCC.dadosCartaoCredito.cpfTitular.length < 11;
+                    && this.formPagamentoCC.dadosCartaoCredito.cpfTitular.length == 11;
                 this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.valid = isValid;
                 return isValid;
             },
             isEnderecoCEPValido: function() {
                 let isValid = this.formPagamentoCC.endereco.cep
                     && this.formPagamentoCC.endereco.cep.length > 0
-                    && this.formPagamentoCC.endereco.cep.length < 8;
-                this.formPagamentoCC.validations.dadosCartaoCredito.cep.valid = isValid;
+                    && this.formPagamentoCC.endereco.cep.length < 11;
+                this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.valid = isValid;
                 return isValid;
             },
             isEnderecoLogradouroValido: function() {
