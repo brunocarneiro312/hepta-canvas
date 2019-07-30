@@ -8,11 +8,6 @@
             </b-row>
             <hr class="shadow-down">
             <br>
-            <b-row>
-                <b-col>
-                    {{ formPagamentoCC.validations.informacoesBeneficiario.nome }}
-                </b-col>
-            </b-row>
             <b-row class="mb-4">
                 <b-col sm="12" md="6" lg="4">
                     <b-form-group class="text-center">
