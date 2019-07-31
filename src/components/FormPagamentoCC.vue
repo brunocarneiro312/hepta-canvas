@@ -33,6 +33,9 @@
                                 </div>
                             </b-input-group-append>
                         </b-input-group>
+                        <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioNomeDirty && !isBeneficiarioNomeValido ? 'block' : 'none' }">
+                            <div v-if="isBeneficiarioNomeNaoInformado">O nome deve ser informado</div>
+                        </div>
                     </b-form-group>
                 </b-col>
                 <b-col sm="12" md="6" lg="4">
@@ -45,6 +48,7 @@
                                           v-model="formPagamentoCC.informacoesBeneficiario.email"
                                           @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"
                                           @focus="setDirty"
+                                          autocomplete="new-password"
                                           class="text-center">
                             </b-form-input>
                             <b-input-group-append>
@@ -57,6 +61,10 @@
                                 </div>
                             </b-input-group-append>
                         </b-input-group>
+                        <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioEmailDirty && !isBeneficiarioEmailValido ? 'block' : 'none' }">
+                            <div v-if="isBeneficiarioEmailNaoInformado">O E-mail deve ser informado</div>
+                            <div v-if="isBeneficiarioEmailInvalido">Informe um e-email válido</div>
+                        </div>
                     </b-form-group>
                 </b-col>
                 <b-col sm="12" md="6" lg="4">
@@ -420,63 +428,77 @@
                         informacoesBeneficiario: {
                             nome: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             email: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             telefone: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             }
                         },
                         dadosCartaoCredito: {
                             numeroCartao: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             validade: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             cvc: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             nomeImpresso: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             cpfTitular: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             }
                         },
                         endereco: {
                             cep: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             logradouro: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             bairro: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             uf: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             cidade: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             },
                             complemento: {
                                 dirty: false,
-                                valid: false
+                                valid: false,
+                                message: undefined
                             }
                         },
                     }
@@ -505,33 +527,47 @@
             setDirty(event) {
                 switch (event.target.id) {
                     case 'nome-beneficiario':
-                        this.formPagamentoCC.validations.informacoesBeneficiario.nome.dirty = true; break;
+                        this.formPagamentoCC.validations.informacoesBeneficiario.nome.dirty = true;
+                        break;
                     case 'email-beneficiario':
-                        this.formPagamentoCC.validations.informacoesBeneficiario.email.dirty = true; break;
+                        this.formPagamentoCC.validations.informacoesBeneficiario.email.dirty = true;
+                        break;
                     case 'telefone-beneficiario':
-                        this.formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty = true; break;
+                        this.formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty = true;
+                        break;
                     case 'numero-cartao-beneficiario':
-                        this.formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.dirty = true; break;
+                        this.formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.dirty = true;
+                        break;
                     case 'nome-cartao-beneficiario':
-                        this.formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso.dirty = true; break;
+                        this.formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso.dirty = true;
+                        break;
                     case 'validade-cartao-beneficiario':
-                        this.formPagamentoCC.validations.dadosCartaoCredito.validade.dirty = true; break;
+                        this.formPagamentoCC.validations.dadosCartaoCredito.validade.dirty = true;
+                        break;
                     case 'cvc-cartao-beneficiario':
-                        this.formPagamentoCC.validations.dadosCartaoCredito.cvc.dirty = true; break;
+                        this.formPagamentoCC.validations.dadosCartaoCredito.cvc.dirty = true;
+                        break;
                     case 'cpf-cartao-beneficiario':
-                        this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty = true; break;
+                        this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty = true;
+                        break;
                     case 'cep-beneficiario':
-                        this.formPagamentoCC.validations.endereco.cep.dirty = true; break;
+                        this.formPagamentoCC.validations.endereco.cep.dirty = true;
+                        break;
                     case 'logradouro-beneficiario':
-                        this.formPagamentoCC.validations.endereco.logradouro.dirty = true; break;
+                        this.formPagamentoCC.validations.endereco.logradouro.dirty = true;
+                        break;
                     case 'bairro-beneficiario':
-                        this.formPagamentoCC.validations.endereco.bairro.dirty = true; break;
+                        this.formPagamentoCC.validations.endereco.bairro.dirty = true;
+                        break;
                     case 'uf-beneficiario':
-                        this.formPagamentoCC.validations.endereco.uf.dirty = true; break;
+                        this.formPagamentoCC.validations.endereco.uf.dirty = true;
+                        break;
                     case 'localidade-beneficiario':
-                        this.formPagamentoCC.validations.endereco.cidade.dirty = true; break;
+                        this.formPagamentoCC.validations.endereco.cidade.dirty = true;
+                        break;
                     case 'complemento-beneficiario':
-                        this.formPagamentoCC.validations.endereco.complemento.dirty = true; break;
+                        this.formPagamentoCC.validations.endereco.complemento.dirty = true;
+                        break;
                 }
             },
             /**
@@ -568,6 +604,10 @@
                 this.formPagamentoCC.validations.informacoesBeneficiario.nome.valid = isValid;
                 return isValid;
             },
+            // Verifica se o nome foi informado
+            isBeneficiarioNomeNaoInformado: function() {
+                return !this.formPagamentoCC.informacoesBeneficiario.nome;
+            },
             // Verifica se o email está válido
             isBeneficiarioEmailValido: function () {
                 const regexpEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -578,10 +618,19 @@
                 this.formPagamentoCC.validations.informacoesBeneficiario.email.valid = isValid;
                 return isValid;
             },
+            // Verifica se o email foi informado
+            isBeneficiarioEmailNaoInformado: function() {
+                return !this.formPagamentoCC.informacoesBeneficiario.email;
+            },
+            // Verifica se o email atende ao padrão especificado
+            isBeneficiarioEmailInvalido: function() {
+                const regexpEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return !regexpEmail.test(this.formPagamentoCC.informacoesBeneficiario.email);
+            },
             isBeneficiarioTelefoneValido: function () {
                 let isValid = this.formPagamentoCC.informacoesBeneficiario.telefone
                     && this.formPagamentoCC.informacoesBeneficiario.telefone.length > 0
-                    && this.formPagamentoCC.informacoesBeneficiario.telefone.length < 12;
+                    && (this.formPagamentoCC.informacoesBeneficiario.telefone.length == 15 || this.formPagamentoCC.informacoesBeneficiario.telefone.length == 14);
                 this.formPagamentoCC.validations.informacoesBeneficiario.telefone.valid = isValid;
                 return isValid;
             },
@@ -674,7 +723,16 @@
                     && this.isEnderecoUFValido
                     && this.isEnderecoCidadeValido
                     && this.isEnderecoComplementoValido
-            }
+            },
+            isBeneficiarioNomeDirty() {
+                return this.formPagamentoCC.validations.informacoesBeneficiario.nome.dirty;
+            },
+            isBeneficiarioEmailDirty() {
+                return this.formPagamentoCC.validations.informacoesBeneficiario.email.dirty;
+            },
+            isBeneficiarioTelefoneDirty() {
+                return this.formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty;
+            },
         }
     }
 </script>
@@ -728,5 +786,15 @@
     }
     .green {
         color: darkgreen;
+    }
+    .invalid-feedback {
+        color: #bd811c;
+    }
+    .invalid-feedback > div::before {
+        font-family: FontAwesome;
+        content: "\f071";
+        display: inline-block;
+        padding-right: 5px;
+        font-weight: 400;
     }
 </style>
