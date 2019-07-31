@@ -34,7 +34,7 @@
                             </b-input-group-append>
                         </b-input-group>
                         <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioNomeDirty && !isBeneficiarioNomeValido ? 'block' : 'none' }">
-                            <div v-if="isBeneficiarioNomeNaoInformado">O nome deve ser informado</div>
+                            <div v-if="isBeneficiarioNomeNaoInformado">Informe o nome</div>
                         </div>
                     </b-form-group>
                 </b-col>
@@ -62,8 +62,8 @@
                             </b-input-group-append>
                         </b-input-group>
                         <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioEmailDirty && !isBeneficiarioEmailValido ? 'block' : 'none' }">
-                            <div v-if="isBeneficiarioEmailNaoInformado">O E-mail deve ser informado</div>
-                            <div v-if="isBeneficiarioEmailInvalido">Informe um e-email válido</div>
+                            <div v-if="isBeneficiarioEmailNaoInformado">Informe o e-mail</div>
+                            <div v-if="isBeneficiarioEmailInvalido">Informe um e-mail válido</div>
                         </div>
                     </b-form-group>
                 </b-col>
@@ -77,6 +77,7 @@
                                           v-model="formPagamentoCC.informacoesBeneficiario.telefone"
                                           @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.telefone, 'telefone-beneficiario')"
                                           @focus="setDirty"
+                                          autocomplete="new-password"
                                           v-mask="['(##) ####-####', '(##) #####-####']"
                                           class="text-center"></b-form-input>
                             <b-input-group-append>
@@ -88,6 +89,10 @@
                                     <i class="fa fa-exclamation-triangle fa-fw"></i>
                                 </div>
                             </b-input-group-append>
+                            <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioTelefoneDirty && !isBeneficiarioTelefoneValido ? 'block' : 'none' }">
+                                <div v-if="isBeneficiarioTelefoneNaoInformado">Informe o telefone</div>
+                                <div v-if="isBeneficiarioTelefoneInvalido">O telefone deve conter no mínimo 10 caracteres</div>
+                            </div>
                         </b-input-group>
                     </b-form-group>
                 </b-col>
@@ -113,6 +118,7 @@
                                                   v-model="formPagamentoCC.dadosCartaoCredito.numeroCartao"
                                                   @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.numeroCartao, 'numero-cartao-beneficiario')"
                                                   @focus="setDirty"
+                                                  autocomplete="new-password"
                                                   v-mask="'#### #### #### ####'"
                                                   class="text-center font-inconsolata"></b-form-input>
                                     <b-input-group-append>
@@ -125,6 +131,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isNumeroCartaoCreditoDirty && !isNumeroCartaoCreditoValido ? 'block' : 'none' }">
+                                    <div>Informe o número do cartão de crédito</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" md="6">
@@ -149,6 +158,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isNomeCartaoCreditoDirty && !isNomeCartaoCreditoValido ? 'block' : 'none' }">
+                                    <div>Informe o nome impresso no cartão</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -175,6 +187,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isValidadeCartaoCreditoDirty && !isValidadeCartaoCreditoValido ? 'block' : 'none' }">
+                                    <div>Informe a validade</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" sm="6" md="3">
@@ -199,6 +214,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isCVCCartaoCreditoDirty && !isCVCCartaoCreditoValido ? 'block' : 'none' }">
+                                    <div>Informe o CVC</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                         <b-col cols="12" md="6">
@@ -223,6 +241,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isCPFTitularCartaoCreditoDirty && !isCPFCartaoCreditoValido ? 'block' : 'none' }">
+                                    <div v-if="isCPFCartaoCreditoNaoInformado">Informe o CPF do titular</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -261,6 +282,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isEnderecoCEPDirty && !isEnderecoCEPValido ? 'block' : 'none' }">
+                                    <div>Informe o CEP</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                         <b-col md="4">
@@ -284,6 +308,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isEnderecoLogradouroDirty && !isEnderecoLogradouroValido ? 'block' : 'none' }">
+                                    <div>Informe o logradouro</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                         <b-col sm="8" md="4">
@@ -307,6 +334,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isEnderecoBairroDirty && !isEnderecoBairroValido ? 'block' : 'none' }">
+                                    <div>Informe o bairro</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                         <b-col sm="4" md="2">
@@ -331,6 +361,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isEnderecoUFDirty && !isEnderecoUFValido ? 'block' : 'none' }">
+                                    <div>Informe a UF</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -356,6 +389,9 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
+                                <div class="text-left invalid-feedback" :style="{ display: isEnderecoCidadeDirty && !isEnderecoCidadeValido ? 'block' : 'none' }">
+                                    <div>Informe a cidade</div>
+                                </div>
                             </b-form-group>
                         </b-col>
                         <b-col sm="4" md="3">
@@ -634,6 +670,16 @@
                 this.formPagamentoCC.validations.informacoesBeneficiario.telefone.valid = isValid;
                 return isValid;
             },
+            isBeneficiarioTelefoneNaoInformado: function() {
+                return !this.formPagamentoCC.informacoesBeneficiario.telefone;
+            },
+            isBeneficiarioTelefoneInvalido: function() {
+                const telefoneField = this.formPagamentoCC.informacoesBeneficiario.telefone;
+                if (telefoneField && (telefoneField.length != 14 || telefoneField.length != 15)) {
+                    return true;
+                }
+                return false;
+            },
             isNumeroCartaoCreditoValido: function () {
                 let isValid = this.formPagamentoCC.dadosCartaoCredito.numeroCartao
                     && this.formPagamentoCC.dadosCartaoCredito.numeroCartao.length > 0
@@ -668,6 +714,9 @@
                     && this.formPagamentoCC.dadosCartaoCredito.cpfTitular.length == 14;
                 this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.valid = isValid;
                 return isValid;
+            },
+            isCPFCartaoCreditoNaoInformado: function() {
+                return !this.formPagamentoCC.dadosCartaoCredito.cpfTitular;
             },
             isEnderecoCEPValido: function() {
                 let isValid = this.formPagamentoCC.endereco.cep
@@ -732,6 +781,39 @@
             },
             isBeneficiarioTelefoneDirty() {
                 return this.formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty;
+            },
+            isNumeroCartaoCreditoDirty() {
+                return this.formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.dirty;
+            },
+            isNomeCartaoCreditoDirty() {
+                return this.formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso.dirty;
+            },
+            isValidadeCartaoCreditoDirty() {
+                return this.formPagamentoCC.validations.dadosCartaoCredito.validade.dirty;
+            },
+            isCVCCartaoCreditoDirty() {
+                return this.formPagamentoCC.validations.dadosCartaoCredito.cvc.dirty;
+            },
+            isCPFTitularCartaoCreditoDirty() {
+                return this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty;
+            },
+            isEnderecoCEPDirty() {
+                return this.formPagamentoCC.validations.endereco.cep.dirty;
+            },
+            isEnderecoLogradouroDirty() {
+                return this.formPagamentoCC.validations.endereco.logradouro.dirty;
+            },
+            isEnderecoBairroDirty() {
+                return this.formPagamentoCC.validations.endereco.bairro.dirty;
+            },
+            isEnderecoUFDirty() {
+                return this.formPagamentoCC.validations.endereco.uf.dirty;
+            },
+            isEnderecoCidadeDirty() {
+                return this.formPagamentoCC.validations.endereco.cidade.dirty;
+            },
+            isEnderecoComplementoDirty() {
+                return this.formPagamentoCC.validations.endereco.cidade.dirty;
             },
         }
     }
