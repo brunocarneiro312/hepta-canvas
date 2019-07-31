@@ -434,8 +434,20 @@
 </template>
 
 <script>
+
+    import { requestViacep } from '../assets/js/viacep.service';
+
     export default {
         name: "FormPagamentoCC",
+        mounted: function() {
+            requestViacep('70765110')
+                .then(function(response) {
+                    console.log(response.data);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                })
+        },
         data: function() {
             return {
                 // Formulário de pagamento
