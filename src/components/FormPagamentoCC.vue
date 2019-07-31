@@ -19,6 +19,7 @@
                                           v-model="formPagamentoCC.informacoesBeneficiario.nome"
                                           @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.nome, 'nome-beneficiario')"
                                           @focus="setDirty"
+                                          v-mask="customTokens"
                                           autocomplete="new-password"
                                           class="text-center">
                             </b-form-input>
@@ -68,6 +69,7 @@
                                           v-model="formPagamentoCC.informacoesBeneficiario.telefone"
                                           @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.telefone, 'telefone-beneficiario')"
                                           @focus="setDirty"
+                                          v-mask="['(##) ####-####', '(##) #####-####']"
                                           class="text-center"></b-form-input>
                             <b-input-group-append>
                                 <div v-if="formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty">
@@ -103,6 +105,7 @@
                                                   v-model="formPagamentoCC.dadosCartaoCredito.numeroCartao"
                                                   @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.numeroCartao, 'numero-cartao-beneficiario')"
                                                   @focus="setDirty"
+                                                  v-mask="'#### #### #### ####'"
                                                   class="text-center font-inconsolata"></b-form-input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.dirty">
@@ -126,6 +129,7 @@
                                                   v-model="formPagamentoCC.dadosCartaoCredito.nomeImpresso"
                                                   @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso, 'nome-cartao-beneficiario')"
                                                   @focus="setDirty"
+                                                  v-mask="customTokens"
                                                   class="text-center"></b-form-input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso.dirty">
@@ -151,6 +155,7 @@
                                                   v-model="formPagamentoCC.dadosCartaoCredito.validade"
                                                   @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.validade, 'validade-cartao-beneficiario')"
                                                   @focus="setDirty"
+                                                  v-mask="'##/####'"
                                                   class="text-center font-inconsolata"></b-form-input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.validade.dirty">
@@ -174,6 +179,7 @@
                                              v-model="formPagamentoCC.dadosCartaoCredito.cvc"
                                              @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cvc, 'cvc-cartao-beneficiario')"
                                              @focus="setDirty"
+                                             v-mask="'###'"
                                              class="text-center font-inconsolata"></b-input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.cvc.dirty">
@@ -197,6 +203,7 @@
                                              v-model="formPagamentoCC.dadosCartaoCredito.cpfTitular"
                                              @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cpfTitular, 'cpf-cartao-beneficiario')"
                                              @focus="setDirty"
+                                             v-mask="'###.###.###-##'"
                                              class="text-center"></b-input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty">
@@ -230,10 +237,11 @@
                                 <b-input-group>
                                     <!-- CEP -->
                                     <b-input id="cep-beneficiario"
-                                             placeholder="00000-000"
+                                             placeholder="70390-700"
                                              v-model="formPagamentoCC.endereco.cep"
                                              @blur="setFormClass(formPagamentoCC.validations.endereco.cep, 'cep-beneficiario')"
                                              @focus="setDirty"
+                                             v-mask="'#####-###'"
                                              class="text-center"></b-input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.endereco.cep.dirty">
@@ -253,7 +261,7 @@
                                 <b-input-group>
                                     <!-- Logradouro -->
                                     <b-input id="logradouro-beneficiario"
-                                             placeholder="SQN 312 BL K"
+                                             placeholder="Q SHLS, 716, Conj B Bloco 5"
                                              v-model="formPagamentoCC.endereco.logradouro"
                                              @blur="setFormClass(formPagamentoCC.validations.endereco.logradouro, 'logradouro-beneficiario')"
                                              @focus="setDirty"
@@ -276,7 +284,7 @@
                                 <b-input-group>
                                     <!-- Bairro -->
                                     <b-input id="bairro-beneficiario"
-                                             placeholder="Asa Norte"
+                                             placeholder="Asa Sul"
                                              v-model="formPagamentoCC.endereco.bairro"
                                              @blur="setFormClass(formPagamentoCC.validations.endereco.bairro, 'bairro-beneficiario')"
                                              @focus="setDirty"
@@ -303,6 +311,7 @@
                                              v-model="formPagamentoCC.endereco.uf"
                                              @blur="setFormClass(formPagamentoCC.validations.endereco.uf, 'uf-beneficiario')"
                                              @focus="setDirty"
+                                             v-mask="'SS'"
                                              class="text-center"></b-input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.endereco.uf.dirty">
@@ -347,7 +356,7 @@
                                 <b-input-group>
                                     <!-- Complemento -->
                                     <b-input id="complemento-beneficiario"
-                                             placeholder="102"
+                                             placeholder="Sala 704"
                                              v-model="formPagamentoCC.endereco.complemento"
                                              @blur="setFormClass(formPagamentoCC.validations.endereco.complemento, 'complemento-beneficiario')"
                                              @focus="setDirty"
@@ -357,9 +366,9 @@
                                             <i class="fa fa-check fa-fw green" v-if="isEnderecoComplementoValido"></i>
                                             <i class="fa fa-times fa-fw red" v-else></i>
                                         </div>
-                                        <div v-else>
-                                            <i class="fa fa-exclamation-triangle fa-fw"></i>
-                                        </div>
+<!--                                        <div v-else>-->
+<!--                                            <i class="fa fa-exclamation-triangle fa-fw"></i>-->
+<!--                                        </div>-->
                                     </b-input-group-append>
                                 </b-input-group>
                             </b-form-group>
@@ -371,7 +380,10 @@
             <hr>
             <b-row>
                 <b-col cols="12" md="3" offset-md="9" class="text-right">
-                    <b-btn variant="success" class="btn-lg font-condensed" block>
+                    <b-btn variant="success"
+                           class="btn-lg font-condensed"
+                           :disabled="!isFormValid"
+                           block>
                         Confirmar <i class="fa fa-check fa-fw"></i>
                     </b-btn>
                 </b-col>
@@ -472,6 +484,18 @@
                         },
                     }
                 },
+                // Regex de máscaras personalizados
+                customTokens: {
+                    mask: 'NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN',
+                    tokens: {
+                        'N': {
+                            pattern: /[a-zA-Z\s]/,
+                            transform: function(v) {
+                                return v;
+                            }
+                        }
+                    }
+                },
             }
         },
         methods: {
@@ -543,7 +567,7 @@
             isBeneficiarioNomeValido: function() {
                 let isValid = this.formPagamentoCC.informacoesBeneficiario.nome
                     && this.formPagamentoCC.informacoesBeneficiario.nome.length > 0
-                    && this.formPagamentoCC.informacoesBeneficiario.nome.length < 50;
+                    && this.formPagamentoCC.informacoesBeneficiario.nome.length <= 70;
                 this.formPagamentoCC.validations.informacoesBeneficiario.nome.valid = isValid;
                 return isValid;
             },
@@ -552,7 +576,7 @@
                 const regexpEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 let isValid = this.formPagamentoCC.informacoesBeneficiario.email
                     && this.formPagamentoCC.informacoesBeneficiario.email.length > 0
-                    && this.formPagamentoCC.informacoesBeneficiario.email.length < 100
+                    && this.formPagamentoCC.informacoesBeneficiario.email.length < 70
                     && regexpEmail.test(this.formPagamentoCC.informacoesBeneficiario.email);
                 this.formPagamentoCC.validations.informacoesBeneficiario.email.valid = isValid;
                 return isValid;
@@ -567,8 +591,7 @@
             isNumeroCartaoCreditoValido: function () {
                 let isValid = this.formPagamentoCC.dadosCartaoCredito.numeroCartao
                     && this.formPagamentoCC.dadosCartaoCredito.numeroCartao.length > 0
-                    && this.formPagamentoCC.dadosCartaoCredito.numeroCartao.length == 16
-                    && !isNaN(this.formPagamentoCC.dadosCartaoCredito.numeroCartao);
+                    && this.formPagamentoCC.dadosCartaoCredito.numeroCartao.length == 19
                 this.formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.valid = isValid;
                 return isValid;
             },
@@ -596,7 +619,7 @@
             },
             isCPFCartaoCreditoValido: function() {
                 let isValid = this.formPagamentoCC.dadosCartaoCredito.cpfTitular
-                    && this.formPagamentoCC.dadosCartaoCredito.cpfTitular.length == 11;
+                    && this.formPagamentoCC.dadosCartaoCredito.cpfTitular.length == 14;
                 this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.valid = isValid;
                 return isValid;
             },
@@ -638,6 +661,22 @@
             isEnderecoComplementoValido: function () {
                 this.formPagamentoCC.validations.endereco.complemento.valid = true;
                 return true;
+            },
+            isFormValid: function() {
+                return this.isBeneficiarioNomeValido
+                    && this.isBeneficiarioEmailValido
+                    && this.isBeneficiarioTelefoneValido
+                    && this.isNumeroCartaoCreditoValido
+                    && this.isNomeCartaoCreditoValido
+                    && this.isValidadeCartaoCreditoValido
+                    && this.isCVCCartaoCreditoValido
+                    && this.isCPFCartaoCreditoValido
+                    && this.isEnderecoCEPValido
+                    && this.isEnderecoLogradouroValido
+                    && this.isEnderecoBairroValido
+                    && this.isEnderecoUFValido
+                    && this.isEnderecoCidadeValido
+                    && this.isEnderecoComplementoValido
             }
         }
     }
