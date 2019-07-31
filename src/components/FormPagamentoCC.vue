@@ -366,9 +366,6 @@
                                             <i class="fa fa-check fa-fw green" v-if="isEnderecoComplementoValido"></i>
                                             <i class="fa fa-times fa-fw red" v-else></i>
                                         </div>
-<!--                                        <div v-else>-->
-<!--                                            <i class="fa fa-exclamation-triangle fa-fw"></i>-->
-<!--                                        </div>-->
                                     </b-input-group-append>
                                 </b-input-group>
                             </b-form-group>
