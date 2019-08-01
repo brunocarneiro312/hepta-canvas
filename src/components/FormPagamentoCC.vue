@@ -435,15 +435,24 @@
 
 <script>
 
-    import { requestViacep } from '../assets/js/viacep.service';
+    import { ViacepService } from '../assets/js/viacep.service';
+    import { RegexpService } from '../assets/js/regexp.service';
 
     export default {
         name: "FormPagamentoCC",
+        beforeCreate: function() {
+        },
+        beforeMount: function() {
+            this.regexService = new RegexpService();
+            this.viacepService = new ViacepService();
+        },
         mounted: function() {
-
         },
         data: function() {
             return {
+                // Referência à serviços externos
+                regexService: undefined,
+                viacepService: undefined,
                 // Formulário de pagamento
                 formPagamentoCC: {
                     informacoesBeneficiario: {
@@ -644,7 +653,7 @@
             requestCEP() {
                 if (this.formPagamentoCC.endereco.cep && this.formPagamentoCC.endereco.cep.length > 8) {
                     const vm = this;
-                    requestViacep(this.formPagamentoCC.endereco.cep.replace('-',''))
+                    this.viacepService.requestViacep(this.formPagamentoCC.endereco.cep.replace('-',''))
                         .then(function(response) {
                             vm.formPagamentoCC.endereco.logradouro  = response.data['logradouro'];
                             vm.formPagamentoCC.endereco.complemento = response.data['complemento'];
@@ -739,7 +748,7 @@
             },
             // Verifica se o email está válido
             isBeneficiarioEmailValido: function () {
-                const regexpEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                const regexpEmail = this.regexService.getEmailRegexPattern();
                 let isValid = this.formPagamentoCC.informacoesBeneficiario.email
                     && this.formPagamentoCC.informacoesBeneficiario.email.length > 0
                     && this.formPagamentoCC.informacoesBeneficiario.email.length < 70
@@ -753,7 +762,7 @@
             },
             // Verifica se o email atende ao padrão especificado
             isBeneficiarioEmailInvalido: function() {
-                const regexpEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                const regexpEmail = this.regexService.getEmailRegexPattern();
                 return !regexpEmail.test(this.formPagamentoCC.informacoesBeneficiario.email);
             },
             isBeneficiarioTelefoneValido: function () {
