@@ -642,10 +642,7 @@
              * ------------------------------------------------------
              */
             requestCEP() {
-                let isCEP = this.formPagamentoCC.endereco.cep;
-                let isCEPLengthOk = this.formPagamentoCC.endereco.cep.length > 8;
-
-                if (isCEP && isCEPLengthOk) {
+                if (this.formPagamentoCC.endereco.cep && this.formPagamentoCC.endereco.cep.length > 8) {
                     const vm = this;
                     requestViacep(this.formPagamentoCC.endereco.cep.replace('-',''))
                         .then(function(response) {
