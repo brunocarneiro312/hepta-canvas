@@ -268,7 +268,7 @@
                                     <b-input id="cep-beneficiario"
                                              placeholder="70390-700"
                                              v-model="formPagamentoCC.endereco.cep"
-                                             @blur="setFormClass(formPagamentoCC.validations.endereco.cep, 'cep-beneficiario')"
+                                             @blur="setFormClass(formPagamentoCC.validations.endereco.cep, 'cep-beneficiario'); requestCEP()"
                                              @focus="setDirty"
                                              v-mask="'#####-###'"
                                              class="text-center"></b-input>
@@ -440,13 +440,7 @@
     export default {
         name: "FormPagamentoCC",
         mounted: function() {
-            requestViacep('70765110')
-                .then(function(response) {
-                    console.log(response.data);
-                })
-                .catch(function(err) {
-                    console.log(err);
-                })
+
         },
         data: function() {
             return {
@@ -641,6 +635,96 @@
                     document.querySelector(`#${formElementId}`).classList.remove('red');
                     document.querySelector(`#${formElementId}`).classList.remove('green');
                 }
+            },
+            /**
+             * ------------------------------------------------------
+             * Solicita ao serviço de CEP o endereço do CEP informado
+             * ------------------------------------------------------
+             */
+            requestCEP() {
+                let isCEP = this.formPagamentoCC.endereco.cep;
+                let isCEPLengthOk = this.formPagamentoCC.endereco.cep.length > 8;
+
+                if (isCEP && isCEPLengthOk) {
+                    const vm = this;
+                    requestViacep(this.formPagamentoCC.endereco.cep.replace('-',''))
+                        .then(function(response) {
+                            vm.formPagamentoCC.endereco.logradouro  = response.data['logradouro'];
+                            vm.formPagamentoCC.endereco.complemento = response.data['complemento'];
+                            vm.formPagamentoCC.endereco.bairro      = response.data['bairro'];
+                            vm.formPagamentoCC.endereco.cidade      = response.data['localidade'];
+                            vm.formPagamentoCC.endereco.uf          = response.data['uf'];
+
+                            vm.setEnderecoDirty();
+
+                            if (!response.data['erro']) {
+                                vm.setEnderecoValid();
+                                vm.setEnderecoFormClassValid();
+                            }
+                            else {
+                                vm.setEnderecoInvalid();
+                                vm.setEnderecoFormClassInvalid();
+                            }
+                        })
+                        .catch(function(err) {
+                            console.log(err);
+                        });
+                }
+            },
+            /**
+             * ------------------------------------------------------
+             * Marca todos os campos do form de endereço como 'dirty'
+             * ------------------------------------------------------
+             */
+            setEnderecoDirty() {
+                this.formPagamentoCC.validations.endereco.logradouro.dirty = true;
+                this.formPagamentoCC.validations.endereco.cidade.dirty = true;
+                this.formPagamentoCC.validations.endereco.uf.dirty = true;
+                this.formPagamentoCC.validations.endereco.bairro.dirty = true;
+            },
+            /**
+             * ------------------------------------------------------
+             * Marca todos os campos do form de endereço como 'valid'
+             * ------------------------------------------------------
+             */
+            setEnderecoValid() {
+                this.formPagamentoCC.validations.endereco.logradouro.valid = true;
+                this.formPagamentoCC.validations.endereco.cidade.dirty = true;
+                this.formPagamentoCC.validations.endereco.uf.dirty = true;
+                this.formPagamentoCC.validations.endereco.bairro.dirty = true;
+            },
+            /**
+             * --------------------------------------------------------
+             * Marca todos os campos do form de endereço como 'invalid'
+             * --------------------------------------------------------
+             */
+            setEnderecoInvalid() {
+                this.formPagamentoCC.validations.endereco.logradouro.valid = false;
+                this.formPagamentoCC.validations.endereco.cidade.dirty = false;
+                this.formPagamentoCC.validations.endereco.uf.dirty = false;
+                this.formPagamentoCC.validations.endereco.bairro.dirty = false;
+            },
+            /**
+             * ---------------------------------------------------------
+             * Seta a borda dos campos de endereço como 'green' (valido)
+             * ---------------------------------------------------------
+             */
+            setEnderecoFormClassValid() {
+                document.querySelector(`#logradouro-beneficiario`).classList.add('green');
+                document.querySelector(`#localidade-beneficiario`).classList.add('green');
+                document.querySelector(`#bairro-beneficiario`).classList.add('green');
+                document.querySelector(`#uf-beneficiario`).classList.add('green');
+            },
+            /**
+             * ---------------------------------------------------------
+             * Seta a borda dos campos de endereço como 'red' (inválido)
+             * ---------------------------------------------------------
+             */
+            setEnderecoFormClassInvalid() {
+                document.querySelector(`#logradouro-beneficiario`).classList.add('red');
+                document.querySelector(`#localidade-beneficiario`).classList.add('red');
+                document.querySelector(`#bairro-beneficiario`).classList.add('red');
+                document.querySelector(`#uf-beneficiario`).classList.add('red');
             },
         },
         computed: {

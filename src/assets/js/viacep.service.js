@@ -12,7 +12,7 @@ export function requestViacep(cep) {
      return axios
         .get(`https://viacep.com.br/ws/${cep}/json/`)
         .then(function(response) {
-            return response.data;
+            return response;
         })
         .catch(function(error) {
             return error;
