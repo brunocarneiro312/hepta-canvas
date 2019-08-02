@@ -79,7 +79,7 @@
                 </b-form-group>
                 <div class="text-muted">
                     <span class="description" v-if="!nroVoucher">
-                        <i class="far fa-exclamation-triangle fa-fw"></i>
+                        <i class="fa fa-exclamation-triangle fa-fw"></i>
                         Insira o número do <i><b>Vale-Compra</b></i>
                     </span>
                 </div>
@@ -96,7 +96,7 @@
                         block>
 
                     Comprar com Vale-Compra&nbsp;
-                    <i class="far fa-ticket-alt fa-fw rotate-45deg"></i>
+                    <i class="fa fa-ticket fa-fw fa-lg"></i>
                 </b-btn>
             </b-col>
         </b-row>

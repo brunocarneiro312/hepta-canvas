@@ -15,7 +15,7 @@
             <b-row v-if="!boleto.url">
                 <b-col cols="6" offset="3">
                     <button class="btn btn-success btn-lg btn-block" @click="gerarBoleto()">
-                        Gerar Boleto <i class="far fa-barcode"></i>
+                        Gerar Boleto <i class="fa fa-barcode fa-lg"></i>
                     </button>
                 </b-col>
             </b-row>

@@ -2,17 +2,26 @@
     <div>
         <b-card no-body>
             <b-tabs card>
-                <b-tab title="Cartão de Crédito" active>
+                <b-tab active>
+                    <template slot="title">
+                        <i class="fa fa-credit-card fa-fw"></i> Cartão de Crédito
+                    </template>
                     <b-card-text>
                         <FormPagamentoCC></FormPagamentoCC>
                     </b-card-text>
                 </b-tab>
-                <b-tab title="Boleto Bancário">
+                <b-tab>
+                    <template slot="title">
+                        <i class="fa fa-barcode fa-fw"></i> Boleto Bancário
+                    </template>
                     <b-card-text>
                         <FormPagamentoBoleto></FormPagamentoBoleto>
                     </b-card-text>
                 </b-tab>
-                <b-tab title="Vale Compra">
+                <b-tab>
+                    <template slot="title">
+                        <i class="fa fa-ticket fa-fw"></i> Vale Compra
+                    </template>
                     <b-card-text>
                         <FormPagamentoValeCompra></FormPagamentoValeCompra>
                     </b-card-text>
@@ -38,5 +47,7 @@
 </script>
 
 <style scoped>
-
+    .card-header {
+        background: lime !important;
+    }
 </style>

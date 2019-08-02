@@ -962,6 +962,8 @@
         border: 1px solid #ddd;
     }
     .btn {
+        border-radius: 0;
+        box-shadow: 0 1px 4px 2px #ddd;
         text-transform: uppercase;
     }
     .btn:hover {
