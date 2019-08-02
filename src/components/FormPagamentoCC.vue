@@ -194,19 +194,19 @@
                         </b-col>
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
-                                <label for="cvc-cartao-beneficiario">CVC</label>
+                                <label for="cvv-cartao-beneficiario">CVV</label>
                                 <b-input-group>
-                                    <!-- CVC do cartão -->
-                                    <b-input id="cvc-cartao-beneficiario"
+                                    <!-- CVV do cartão -->
+                                    <b-input id="cvv-cartao-beneficiario"
                                              placeholder="000"
-                                             v-model="formPagamentoCC.dadosCartaoCredito.cvc"
-                                             @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cvc, 'cvc-cartao-beneficiario')"
-                                             @focus="setDirty"
+                                             v-model="formPagamentoCC.dadosCartaoCredito.cvv"
+                                             @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cvv, 'cvv-cartao-beneficiario');flipCard()"
+                                             @focus="setDirty;flipCard()"
                                              v-mask="'###'"
                                              class="text-center font-inconsolata"></b-input>
                                     <b-input-group-append>
-                                        <div v-if="formPagamentoCC.validations.dadosCartaoCredito.cvc.dirty">
-                                            <i class="fa fa-check fa-fw green" v-if="isCVCCartaoCreditoValido"></i>
+                                        <div v-if="formPagamentoCC.validations.dadosCartaoCredito.cvv.dirty">
+                                            <i class="fa fa-check fa-fw green" v-if="isCVVCartaoCreditoValido"></i>
                                             <i class="fa fa-times fa-fw red" v-else></i>
                                         </div>
                                         <div v-else>
@@ -214,8 +214,8 @@
                                         </div>
                                     </b-input-group-append>
                                 </b-input-group>
-                                <div class="text-left invalid-feedback" :style="{ display: isCVCCartaoCreditoDirty && !isCVCCartaoCreditoValido ? 'block' : 'none' }">
-                                    <div>Informe o CVC</div>
+                                <div class="text-left invalid-feedback" :style="{ display: isCVVCartaoCreditoDirty && !isCVVCartaoCreditoValido ? 'block' : 'none' }">
+                                    <div>Informe o CVV</div>
                                 </div>
                             </b-form-group>
                         </b-col>
@@ -248,11 +248,12 @@
                         </b-col>
                     </b-row>
                     <b-row class="justify-content-md-center">
-                        <b-col md="8" lg="6" xl="5">
-                            <VisualCard :name="'Bruno'"
-                                        :card-number="'0123456789012345'"
-                                        :expiration="'12/2020'"
-                                        :cvv="123">
+                        <b-col md="8" lg="6" xl="5" class="pt-4 pb-4">
+                            <VisualCard :name="formPagamentoCC.dadosCartaoCredito.nomeImpresso"
+                                        :card-number="formPagamentoCC.dadosCartaoCredito.numeroCartao"
+                                        :expiration="formPagamentoCC.dadosCartaoCredito.validade"
+                                        :cvv="formPagamentoCC.dadosCartaoCredito.cvv"
+                                        :flip="isCardFlipped">
                             </VisualCard>
                         </b-col>
                     </b-row>
@@ -466,6 +467,8 @@
                 // Referência à serviços externos
                 regexService: undefined,
                 viacepService: undefined,
+                // Define se o cartão está de frente ou de verso
+                isCardFlipped: undefined,
                 // Formulário de pagamento
                 formPagamentoCC: {
                     informacoesBeneficiario: {
@@ -476,7 +479,7 @@
                     dadosCartaoCredito: {
                         numeroCartao: undefined,
                         validade: undefined,
-                        cvc: undefined,
+                        cvv: undefined,
                         nomeImpresso: undefined,
                         cpfTitular: undefined
                     },
@@ -517,7 +520,7 @@
                                 valid: false,
                                 message: undefined
                             },
-                            cvc: {
+                            cvv: {
                                 dirty: false,
                                 valid: false,
                                 message: undefined
@@ -608,8 +611,8 @@
                     case 'validade-cartao-beneficiario':
                         this.formPagamentoCC.validations.dadosCartaoCredito.validade.dirty = true;
                         break;
-                    case 'cvc-cartao-beneficiario':
-                        this.formPagamentoCC.validations.dadosCartaoCredito.cvc.dirty = true;
+                    case 'cvv-cartao-beneficiario':
+                        this.formPagamentoCC.validations.dadosCartaoCredito.cvv.dirty = true;
                         break;
                     case 'cpf-cartao-beneficiario':
                         this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty = true;
@@ -747,6 +750,9 @@
                 document.querySelector(`#bairro-beneficiario`).classList.add('red');
                 document.querySelector(`#uf-beneficiario`).classList.add('red');
             },
+            flipCard() {
+                this.isCardFlipped = !this.isCardFlipped;
+            }
         },
         computed: {
             // Verifica se o nome está válido
@@ -819,11 +825,11 @@
                 this.formPagamentoCC.validations.dadosCartaoCredito.validade.valid = isValid;
                 return isValid;
             },
-            isCVCCartaoCreditoValido: function() {
-                let isValid = this.formPagamentoCC.dadosCartaoCredito.cvc
-                    && this.formPagamentoCC.dadosCartaoCredito.cvc.length == 3
-                    && !isNaN(this.formPagamentoCC.dadosCartaoCredito.cvc);
-                this.formPagamentoCC.validations.dadosCartaoCredito.cvc.valid = isValid;
+            isCVVCartaoCreditoValido: function() {
+                let isValid = this.formPagamentoCC.dadosCartaoCredito.cvv
+                    && this.formPagamentoCC.dadosCartaoCredito.cvv.length == 3
+                    && !isNaN(this.formPagamentoCC.dadosCartaoCredito.cvv);
+                this.formPagamentoCC.validations.dadosCartaoCredito.cvv.valid = isValid;
                 return isValid;
             },
             isCPFCartaoCreditoValido: function() {
@@ -881,7 +887,7 @@
                     && this.isNumeroCartaoCreditoValido
                     && this.isNomeCartaoCreditoValido
                     && this.isValidadeCartaoCreditoValido
-                    && this.isCVCCartaoCreditoValido
+                    && this.isCVVCartaoCreditoValido
                     && this.isCPFCartaoCreditoValido
                     && this.isEnderecoCEPValido
                     && this.isEnderecoLogradouroValido
@@ -908,8 +914,8 @@
             isValidadeCartaoCreditoDirty() {
                 return this.formPagamentoCC.validations.dadosCartaoCredito.validade.dirty;
             },
-            isCVCCartaoCreditoDirty() {
-                return this.formPagamentoCC.validations.dadosCartaoCredito.cvc.dirty;
+            isCVVCartaoCreditoDirty() {
+                return this.formPagamentoCC.validations.dadosCartaoCredito.cvv.dirty;
             },
             isCPFTitularCartaoCreditoDirty() {
                 return this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty;

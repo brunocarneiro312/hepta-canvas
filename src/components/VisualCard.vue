@@ -1,6 +1,6 @@
 <template>
     <div class="flip-card">
-        <div class="flip-card-inner">
+        <div id="card-inner" class="flip-card-inner">
             <div class="flip-card-front">
                 <b-row class="no-gutters p-1">
                     <b-col class="section-1">
@@ -23,7 +23,7 @@
                                     <b>NÚMERO DO CARTÃO</b>
                                 </div>
                                 <div class="big-text">
-                                    {{ formattedCardNumber }}
+                                    {{ formattedCardNumber || '0000 0000 0000 0000' }}
                                 </div>
                             </b-col>
                         </b-row>
@@ -37,7 +37,7 @@
                                     <b>NOME IMPRESSO</b>
                                 </div>
                                 <div>
-                                    <b class="text-uppercase">{{ name }}</b>
+                                    <b class="text-uppercase">{{ name || 'seu nome'}}</b>
                                 </div>
                             </b-col>
                             <b-col class="text-right">
@@ -45,7 +45,7 @@
                                     <b>VALIDADE</b>
                                 </div>
                                 <div>
-                                    <b>{{ expiration }}</b>
+                                    <b>{{ expiration || '00/0000'}}</b>
                                 </div>
                             </b-col>
                         </b-row>
@@ -76,7 +76,7 @@
                                 <div>
                                     <b-row class="cvv-stripe font-inconsolata no-gutters p-0">
                                         <b-col class="text-center big-text" offset="10" style="background: #ddd">
-                                            {{ cvv }}
+                                            {{ cvv || '000' }}
                                         </b-col>
                                     </b-row>
                                 </div>
@@ -103,10 +103,8 @@
             name: String,
             cardNumber: String,
             expiration: String,
-            cvv: Number
-        },
-        mounted: function() {
-
+            cvv: String,
+            flip: Boolean
         },
         data: function() {
             return {
@@ -115,12 +113,34 @@
         },
         computed: {
             formattedCardNumber() {
-                let group1 = this.cardNumber.split('').slice(0, 4).join('');
-                let group2 = this.cardNumber.split('').slice(4, 8).join('');
-                let group3 = this.cardNumber.split('').slice(8, 12).join('');
-                let group4 = this.cardNumber.split('').slice(12).join('');
+                return this.cardNumber;
+            }
+        },
+        watch: {
+            flip: function(newVal, oldVal) {
+                this.flipCard();
+            },
+            name: function(newVal, oldVal) {
 
-                return `${group1} ${group2} ${group3} ${group4}`;
+            },
+            cardNumber: function(newVal, oldVal) {
+
+            },
+            cvv: function(newVal, oldVal) {
+
+            },
+            expiration: function(newVal, oldVal)  {
+
+            }
+        },
+        methods: {
+            flipCard() {
+                if (this.flip) {
+                    document.querySelector("#card-inner").classList.add('rotateY180deg');
+                }
+                else {
+                    document.querySelector("#card-inner").classList.remove('rotateY180deg');
+                }
             }
         }
     }
@@ -144,8 +164,12 @@
         border-radius: 15px;
     }
 
-    .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
+    /*.flip-card:hover .flip-card-inner {*/
+    /*    transform: rotateY(180deg);*/
+    /*}*/
+
+    .rotateY180deg {
+        transform: rotateY(180deg);transform: rotateY(180deg);
     }
 
     .flip-card-front, .flip-card-back {
