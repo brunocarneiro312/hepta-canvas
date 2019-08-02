@@ -23,7 +23,7 @@
                                     <b>NÚMERO DO CARTÃO</b>
                                 </div>
                                 <div class="big-text">
-                                    0000 0000 0000 0000
+                                    {{ formattedCardNumber }}
                                 </div>
                             </b-col>
                         </b-row>
@@ -37,7 +37,7 @@
                                     <b>NOME IMPRESSO</b>
                                 </div>
                                 <div>
-                                    <b>BRUNO CARNEIRO</b>
+                                    <b class="text-uppercase">{{ name }}</b>
                                 </div>
                             </b-col>
                             <b-col class="text-right">
@@ -45,7 +45,7 @@
                                     <b>VALIDADE</b>
                                 </div>
                                 <div>
-                                    <b>12/2030</b>
+                                    <b>{{ expiration }}</b>
                                 </div>
                             </b-col>
                         </b-row>
@@ -74,16 +74,16 @@
                         <b-row>
                             <b-col>
                                 <div>
-                                    <b-row class="cvc-stripe font-inconsolata no-gutters p-0">
+                                    <b-row class="cvv-stripe font-inconsolata no-gutters p-0">
                                         <b-col class="text-center big-text" offset="10" style="background: #ddd">
-                                            000
+                                            {{ cvv }}
                                         </b-col>
                                     </b-row>
                                 </div>
                                 <div class="tiny-text text-center mr-3">
                                     <b-row>
                                         <b-col offset="10">
-                                            <b>CVC</b>
+                                            <b>CVV</b>
                                         </b-col>
                                     </b-row>
                                 </div>
@@ -98,7 +98,31 @@
 
 <script>
     export default {
-        name: "VisualCard"
+        name: "VisualCard",
+        props: {
+            name: String,
+            cardNumber: String,
+            expiration: String,
+            cvv: Number
+        },
+        mounted: function() {
+
+        },
+        data: function() {
+            return {
+
+            }
+        },
+        computed: {
+            formattedCardNumber() {
+                let group1 = this.cardNumber.split('').slice(0, 4).join('');
+                let group2 = this.cardNumber.split('').slice(4, 8).join('');
+                let group3 = this.cardNumber.split('').slice(8, 12).join('');
+                let group4 = this.cardNumber.split('').slice(12).join('');
+
+                return `${group1} ${group2} ${group3} ${group4}`;
+            }
+        }
     }
 </script>
 
@@ -166,7 +190,7 @@
         height: 40px;
     }
 
-    .cvc-stripe {
+    .cvv-stripe {
         background: #f5f5f5;
         border: 1px solid #ddd;
         padding: 5px;

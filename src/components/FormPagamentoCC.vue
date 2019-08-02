@@ -249,7 +249,11 @@
                     </b-row>
                     <b-row class="justify-content-md-center">
                         <b-col md="8" lg="6" xl="5">
-                            <VisualCard></VisualCard>
+                            <VisualCard :name="'Bruno'"
+                                        :card-number="'0123456789012345'"
+                                        :expiration="'12/2020'"
+                                        :cvv="123">
+                            </VisualCard>
                         </b-col>
                     </b-row>
                 </b-col>
