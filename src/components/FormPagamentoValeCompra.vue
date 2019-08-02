@@ -114,7 +114,6 @@
     }
     .alert {
         border-radius: 0;
-        box-shadow: 0 1px 5px #ddd;
     }
     .rotating {
         transition: all .5s;

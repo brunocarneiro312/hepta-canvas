@@ -12,7 +12,7 @@
         <!-- Contém o botão para gerar o boleto -->
         <div class="form-group-text-center botao-gerar-container">
             <b-row v-if="!boleto.url">
-                <b-col cols="6" offset="3">
+                <b-col>
                     <button class="btn btn-success btn-lg btn-block" @click="gerarBoleto()">
                         Gerar Boleto <i class="fa fa-barcode fa-lg"></i>
                     </button>
@@ -92,7 +92,6 @@
     }
     .alert {
         border-radius: 0;
-        box-shadow: 0 1px 4px 2px #ddd;
     }
     .btn {
         border-radius: 0;
