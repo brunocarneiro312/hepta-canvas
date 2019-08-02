@@ -6,11 +6,11 @@
                     <b-col class="section-1">
                         <b-row class="text-center">
                             <b-col class="card-brands large-text">
-                                <i class="fa fa-cc-visa fa-fw fa-lg"></i>
-                                <i class="fa fa-cc-mastercard fa-fw fa-lg"></i>
-                                <i class="fa fa-cc-discover fa-fw fa-lg"></i>
-                                <i class="fa fa-cc-diners-club fa-fw fa-lg"></i>
-                                <i class="fa fa-cc-amex fa-fw fa-lg"></i>
+                                <i class="fa fa-cc-visa fa-fw"></i>
+                                <i class="fa fa-cc-mastercard fa-fw"></i>
+                                <i class="fa fa-cc-discover fa-fw"></i>
+                                <i class="fa fa-cc-diners-club fa-fw"></i>
+                                <i class="fa fa-cc-amex fa-fw"></i>
                             </b-col>
                         </b-row>
                     </b-col>
@@ -18,7 +18,7 @@
                 <b-row class="no-gutters p-2">
                     <b-col class="section-2">
                         <b-row>
-                            <b-col cols="10">
+                            <b-col>
                                 <div class="tiny-text">
                                     <b>NÚMERO DO CARTÃO</b>
                                 </div>
@@ -32,12 +32,12 @@
                 <b-row class="no-gutters p-2">
                     <b-col class="section-3">
                         <b-row>
-                            <b-col>
+                            <b-col cols="8">
                                 <div class="tiny-text">
                                     <b>NOME IMPRESSO</b>
                                 </div>
                                 <div>
-                                    <b class="text-uppercase">{{ name || 'seu nome'}}</b>
+                                    <b class="text-uppercase">{{ formattedName || 'seu nome'}}</b>
                                 </div>
                             </b-col>
                             <b-col class="text-right">
@@ -114,6 +114,12 @@
         computed: {
             formattedCardNumber() {
                 return this.cardNumber;
+            },
+            formattedName() {
+                if (this.name && this.name.length) {
+                    return this.name.split('').slice(0, 20).join('');
+                }
+                return this.name;
             }
         },
         watch: {
