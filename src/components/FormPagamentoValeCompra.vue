@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <b-container class="shadow-sm p-3 bg-white">
         <b-row>
             <b-col>
 
@@ -7,12 +7,9 @@
                 <div>
                     <b-alert variant="primary" show v-if="showInfoMessage">
                         <b-row class="mt-0">
-                            <b-col cols="8" class="mt-0">
+                            <b-col class="mt-0 text-center">
                                 <h4 class="font-weight-bold">Número do Vale Compra</h4>
                                 <span>Insira o número do Vale Compra para pagar a consulta.</span>
-                            </b-col>
-                            <b-col class="mt-0 text-right">
-                                <i class="far fa-keyboard fa-fw"></i>
                             </b-col>
                         </b-row>
                     </b-alert>
@@ -77,7 +74,7 @@
                             trim>
                     </b-form-input>
                 </b-form-group>
-                <div class="text-muted">
+                <div class="text-muted text-center warning-color">
                     <span class="description" v-if="!nroVoucher">
                         <i class="fa fa-exclamation-triangle fa-fw"></i>
                         Insira o número do <i><b>Vale-Compra</b></i>
@@ -133,6 +130,12 @@
     }
     .description {
         font-size: 0.8em;
+    }
+    .warning-color {
+        color: #bd811c !important;
+    }
+    .container {
+        border: 1px solid #ddd;
     }
     @-webkit-keyframes rotating {
 

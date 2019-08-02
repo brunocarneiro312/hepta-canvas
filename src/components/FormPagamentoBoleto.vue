@@ -1,6 +1,5 @@
 <template>
-    <div>
-
+    <b-container class="shadow-sm p-3 bg-white">
         <!-- Informações adicionais sobre o pagamento com boleto -->
         <div class="boleto-texto text-center">
             <b-alert variant="primary" show>
@@ -72,7 +71,7 @@
                 </b-col>
             </b-row>
         </div>
-    </div>
+    </b-container>
 </template>
 <style scoped>
     input {
@@ -117,6 +116,9 @@
     }
     .botao-gerar-container btn {
         font-weight: bold;
+    }
+    .container {
+        border: 1px solid #ddd;
     }
 </style>
 <script type="text/javascript">
