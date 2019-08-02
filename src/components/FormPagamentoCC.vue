@@ -247,6 +247,11 @@
                             </b-form-group>
                         </b-col>
                     </b-row>
+                    <b-row class="justify-content-md-center">
+                        <b-col md="8" lg="6" xl="5">
+                            <VisualCard></VisualCard>
+                        </b-col>
+                    </b-row>
                 </b-col>
             </b-row>
             <br>
@@ -437,9 +442,13 @@
 
     import { ViacepService } from '../assets/js/viacep.service';
     import { RegexpService } from '../assets/js/regexp.service';
+    import VisualCard from "./VisualCard";
 
     export default {
         name: "FormPagamentoCC",
+        components: {
+            VisualCard,
+        },
         beforeCreate: function() {
         },
         beforeMount: function() {
@@ -653,8 +662,10 @@
             requestCEP() {
                 if (this.formPagamentoCC.endereco.cep && this.formPagamentoCC.endereco.cep.length > 8) {
                     const vm = this;
+
                     this.viacepService.requestViacep(this.formPagamentoCC.endereco.cep.replace('-',''))
                         .then(function(response) {
+
                             vm.formPagamentoCC.endereco.logradouro  = response.data['logradouro'];
                             vm.formPagamentoCC.endereco.complemento = response.data['complemento'];
                             vm.formPagamentoCC.endereco.bairro      = response.data['bairro'];
@@ -684,9 +695,9 @@
              */
             setEnderecoDirty() {
                 this.formPagamentoCC.validations.endereco.logradouro.dirty = true;
-                this.formPagamentoCC.validations.endereco.cidade.dirty = true;
-                this.formPagamentoCC.validations.endereco.uf.dirty = true;
-                this.formPagamentoCC.validations.endereco.bairro.dirty = true;
+                this.formPagamentoCC.validations.endereco.cidade.dirty     = true;
+                this.formPagamentoCC.validations.endereco.uf.dirty         = true;
+                this.formPagamentoCC.validations.endereco.bairro.dirty     = true;
             },
             /**
              * ------------------------------------------------------
@@ -695,9 +706,9 @@
              */
             setEnderecoValid() {
                 this.formPagamentoCC.validations.endereco.logradouro.valid = true;
-                this.formPagamentoCC.validations.endereco.cidade.dirty = true;
-                this.formPagamentoCC.validations.endereco.uf.dirty = true;
-                this.formPagamentoCC.validations.endereco.bairro.dirty = true;
+                this.formPagamentoCC.validations.endereco.cidade.dirty     = true;
+                this.formPagamentoCC.validations.endereco.uf.dirty         = true;
+                this.formPagamentoCC.validations.endereco.bairro.dirty     = true;
             },
             /**
              * --------------------------------------------------------
@@ -706,9 +717,9 @@
              */
             setEnderecoInvalid() {
                 this.formPagamentoCC.validations.endereco.logradouro.valid = false;
-                this.formPagamentoCC.validations.endereco.cidade.dirty = false;
-                this.formPagamentoCC.validations.endereco.uf.dirty = false;
-                this.formPagamentoCC.validations.endereco.bairro.dirty = false;
+                this.formPagamentoCC.validations.endereco.cidade.dirty     = false;
+                this.formPagamentoCC.validations.endereco.uf.dirty         = false;
+                this.formPagamentoCC.validations.endereco.bairro.dirty     = false;
             },
             /**
              * ---------------------------------------------------------

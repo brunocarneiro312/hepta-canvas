@@ -1,22 +1,26 @@
 <template>
   <div id="app">
-    <br>
-    <FormPagamentoCC></FormPagamentoCC>
+      <div class="container mt-5">
+          <FormPagamentoCC></FormPagamentoCC>
+<!--          <VisualCard></VisualCard>-->
+      </div>
     <br>
   </div>
 </template>
 
 <script>
 
-import './assets/css/global.css';
-import 'font-awesome/css/font-awesome.css';
+    import './assets/css/global.css';
+    import 'font-awesome/css/font-awesome.css';
 
-import FormPagamentoCC from "./components/FormPagamentoCC";
+    import FormPagamentoCC from "./components/FormPagamentoCC";
+    import VisualCard from "./components/VisualCard";
 
-export default {
+    export default {
   name: 'app',
   components: {
-    FormPagamentoCC
+    FormPagamentoCC,
+    VisualCard
   }
 }
 </script>

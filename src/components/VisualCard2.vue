@@ -1,0 +1,128 @@
+<template>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <b-row class="no-gutters p-1">
+                    <b-col class="section-1">
+                        <b-row class="text-center">
+                            <b-col class="card-brands large-text">
+                                <i class="fa fa-cc-visa fa-fw fa-lg"></i>
+                                <i class="fa fa-cc-mastercard fa-fw fa-lg"></i>
+                                <i class="fa fa-cc-discover fa-fw fa-lg"></i>
+                                <i class="fa fa-cc-diners-club fa-fw fa-lg"></i>
+                                <i class="fa fa-cc-amex fa-fw fa-lg"></i>
+                            </b-col>
+                        </b-row>
+                    </b-col>
+                </b-row>
+                <b-row class="no-gutters p-2">
+                    <b-col class="section-2">
+                        <b-row>
+                            <b-col cols="10">
+                                <div class="tiny-text">
+                                    <b>NÚMERO DO CARTÃO</b>
+                                </div>
+                                <div class="big-text">
+                                    0000 0000 0000 0000
+                                </div>
+                            </b-col>
+                        </b-row>
+                    </b-col>
+                </b-row>
+                <b-row class="no-gutters p-2">
+                    <b-col class="section-3">
+                        <b-row>
+                            <b-col>
+                                <div class="tiny-text">
+                                    <b>NOME IMPRESSO</b>
+                                </div>
+                                <div>
+                                    <b>BRUNO CARNEIRO</b>
+                                </div>
+                            </b-col>
+                            <b-col class="text-right">
+                                <div class="tiny-text">
+                                    <b>VALIDADE</b>
+                                </div>
+                                <div>
+                                    <b>12/2030</b>
+                                </div>
+                            </b-col>
+                        </b-row>
+                    </b-col>
+                </b-row>
+            </div>
+            <div class="flip-card-back">
+                <h1>John Doe</h1>
+                <p>Architect & Engineer</p>
+                <p>We love that guy</p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "VisualCard2"
+    }
+</script>
+
+<style scoped>
+    .flip-card {
+        background-color: transparent;
+        width: 380px;
+        height: 220px;
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+        color: black;
+        background: white;
+        border: 2px solid #999;
+    }
+
+    .flip-card-back {
+        transform: rotateY(180deg);
+        background: white;
+        border: 2px solid #999;
+    }
+
+    .section-1 {
+        height: 60px;
+    }
+
+    .section-2,
+    .section-3 {
+        color: rgba(0, 0, 0, .5);
+        font-family: 'Source Code Pro', monospace;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .card-brands i {
+        margin-right: 7.5px;
+        color: rgba(0, 0, 0, .65);
+    }
+</style>
+
+
