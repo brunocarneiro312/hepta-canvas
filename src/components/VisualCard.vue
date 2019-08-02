@@ -186,14 +186,16 @@
 
     .flip-card-front {
         color: black;
-        background: white;
+        background: rgb(255,255,255);
+        background: linear-gradient(159deg, rgba(255,255,255,1) 0%, rgba(221,221,221,1) 100%, rgba(0,212,255,1) 100%);
         border: 2px solid #999;
         border-radius: 15px;
     }
 
     .flip-card-back {
         transform: rotateY(180deg);
-        background: white;
+        background: rgb(255,255,255);
+        background: linear-gradient(159deg, rgba(255,255,255,1) 0%, rgba(221,221,221,1) 100%, rgba(0,212,255,1) 100%);
         border: 2px solid #999;
         border-radius: 15px;
     }
