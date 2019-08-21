@@ -414,13 +414,9 @@
                                              v-model="formPagamentoCC.endereco.complemento"
                                              @blur="setFormClass(formPagamentoCC.validations.endereco.complemento, 'complemento-beneficiario')"
                                              @focus="setDirty"
-                                             class="text-center"></b-input>
-                                    <b-input-group-append>
-                                        <div v-if="formPagamentoCC.validations.endereco.complemento.dirty">
-                                            <i class="fa fa-check fa-fw green" v-if="isEnderecoComplementoValido"></i>
-                                            <i class="fa fa-times fa-fw red" v-else></i>
-                                        </div>
-                                    </b-input-group-append>
+                                             style="border: 1px solid #ddd"
+                                             class="text-center">
+                                    </b-input>
                                 </b-input-group>
                             </b-form-group>
                         </b-col>
