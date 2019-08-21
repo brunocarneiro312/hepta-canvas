@@ -165,14 +165,14 @@
         width: 100%;
         height: 100%;
         transition: transform 0.6s;
+        -moz-transition: transform 0.6s;
         transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transition: -webkit-transform 0.6s;
+        transition: transform 0.6s, -webkit-transform 0.6s;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         border-radius: 15px;
     }
-
-    /*.flip-card:hover .flip-card-inner {*/
-    /*    transform: rotateY(180deg);*/
-    /*}*/
 
     .rotateY180deg {
         transform: rotateY(180deg);transform: rotateY(180deg);
@@ -194,10 +194,20 @@
 
     .flip-card-back {
         transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
         background: rgb(255,255,255);
         background: linear-gradient(159deg, rgba(255,255,255,1) 0%, rgba(221,221,221,1) 100%, rgba(0,212,255,1) 100%);
         border: 2px solid #999;
         border-radius: 15px;
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        max-width: 400px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
     }
 
     .section-1 {

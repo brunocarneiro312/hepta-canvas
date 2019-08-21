@@ -948,9 +948,17 @@
     }
     input.form-control {
         border-radius: 0;
-        /*box-shadow: inset 0 1px 1px #ddd;*/
+        box-shadow: inset 0 2px 3px #ddd;
         border-right: 0;
         color: black;
+    }
+    input.form-control:active,
+    input.form-control:hover {
+        box-shadow: inset 0 2px 3px #ddd !important;
+    }
+    div.input-group-append {
+        border-left: 1px solid #ddd;
+
     }
     label {
         text-transform: uppercase;
