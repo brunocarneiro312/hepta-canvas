@@ -9,7 +9,7 @@
             <hr class="shadow-down">
             <br>
             <b-row class="mb-4">
-                <b-col sm="12" md="6" lg="4">
+                <b-col sm="12" md="6" lg="3">
                     <b-form-group class="text-center">
                         <label for="nome-beneficiario">Nome</label>
                         <b-input-group>
@@ -38,7 +38,7 @@
                         </div>
                     </b-form-group>
                 </b-col>
-                <b-col sm="12" md="6" lg="4">
+                <b-col sm="12" md="6" lg="3">
                     <b-form-group class="text-center">
                         <label for="email-beneficiario">E-mail</label>
                         <b-input-group>
@@ -67,7 +67,7 @@
                         </div>
                     </b-form-group>
                 </b-col>
-                <b-col sm="12" md="6" lg="4">
+                <b-col sm="12" md="6" lg="3">
                     <b-form-group class="text-center">
                         <label for="telefone-beneficiario">Telefone</label>
                         <b-input-group>
@@ -92,6 +92,35 @@
                             <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioTelefoneDirty && !isBeneficiarioTelefoneValido ? 'block' : 'none' }">
                                 <div v-if="isBeneficiarioTelefoneNaoInformado">Informe o telefone</div>
                                 <div v-if="isBeneficiarioTelefoneInvalido">O telefone deve conter no mínimo 10 caracteres</div>
+                            </div>
+                        </b-input-group>
+                    </b-form-group>
+                </b-col>
+                <b-col sm="12" md="6" lg="3">
+                    <b-form-group class="text-center">
+                        <label for="data-nascimento-beneficiario">Data de Nascimento</label>
+                        <b-input-group>
+                            <!-- Data de Nascimento -->
+                            <b-form-input id="data-nascimento-beneficiario"
+                                          placeholder="00/00/0000"
+                                          v-model="formPagamentoCC.informacoesBeneficiario.dataNascimento"
+                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.dataNascimento, 'data-nascimento-beneficiario')"
+                                          @focus="setDirty"
+                                          autocomplete="new-password"
+                                          v-mask="'##/##/####'"
+                                          class="text-center"></b-form-input>
+                            <b-input-group-append>
+                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.dataNascimento.dirty">
+                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioDataNascimentoValido"></i>
+                                    <i class="fa fa-times fa-fw red" v-else></i>
+                                </div>
+                                <div v-else>
+                                    <i class="fa fa-exclamation-triangle fa-fw"></i>
+                                </div>
+                            </b-input-group-append>
+                            <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioDataNascimentoDirty && !isBeneficiarioDataNascimentoValido ? 'block' : 'none' }">
+                                <div v-if="isBeneficiarioDataNascimentoNaoInformado">Informe a data de nascimento</div>
+                                <div v-if="isBeneficiarioDataNascimentoInvalido">Data de nascimento inválida</div>
                             </div>
                         </b-input-group>
                     </b-form-group>
@@ -471,6 +500,7 @@
                         nome: undefined,
                         email: undefined,
                         telefone: undefined,
+                        dataNascimento: undefined,
                     },
                     dadosCartaoCredito: {
                         numeroCartao: undefined,
@@ -500,6 +530,11 @@
                                 message: undefined
                             },
                             telefone: {
+                                dirty: false,
+                                valid: false,
+                                message: undefined
+                            },
+                            dataNascimento: {
                                 dirty: false,
                                 valid: false,
                                 message: undefined
@@ -597,6 +632,9 @@
                         break;
                     case 'telefone-beneficiario':
                         this.formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty = true;
+                        break;
+                    case 'data-nascimento-beneficiario':
+                        this.formPagamentoCC.validations.informacoesBeneficiario.dataNascimento.dirty = true;
                         break;
                     case 'numero-cartao-beneficiario':
                         this.formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.dirty = true;
@@ -799,6 +837,23 @@
                 }
                 return false;
             },
+            isBeneficiarioDataNascimentoValido: function () {
+                let isValid = this.formPagamentoCC.informacoesBeneficiario.dataNascimento
+                  && this.formPagamentoCC.informacoesBeneficiario.dataNascimento.length > 0
+                  && this.formPagamentoCC.informacoesBeneficiario.dataNascimento.length == 10;
+                this.formPagamentoCC.validations.informacoesBeneficiario.dataNascimento.valid = isValid;
+                return isValid;
+            },
+            isBeneficiarioDataNascimentoNaoInformado: function() {
+                return !this.formPagamentoCC.informacoesBeneficiario.dataNascimento;
+            },
+            isBeneficiarioDataNascimentoInvalido: function() {
+                const dataNascimentoField = this.formPagamentoCC.informacoesBeneficiario.dataNascimento;
+                if (dataNascimentoField && dataNascimentoField.length < 10) {
+                    return true;
+                }
+                return false;
+            },
             isNumeroCartaoCreditoValido: function () {
                 let isValid = this.formPagamentoCC.dadosCartaoCredito.numeroCartao
                     && this.formPagamentoCC.dadosCartaoCredito.numeroCartao.length > 0
@@ -900,6 +955,9 @@
             },
             isBeneficiarioTelefoneDirty() {
                 return this.formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty;
+            },
+            isBeneficiarioDataNascimentoDirty() {
+                return this.formPagamentoCC.validations.informacoesBeneficiario.dataNascimento.dirty;
             },
             isNumeroCartaoCreditoDirty() {
                 return this.formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.dirty;
