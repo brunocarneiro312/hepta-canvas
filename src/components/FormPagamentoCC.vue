@@ -8,8 +8,8 @@
             </b-row>
             <hr class="shadow-down">
             <br>
-            <b-row class="mb-4">
-                <b-col sm="12" md="6" lg="3">
+            <b-row>
+                <b-col cols="12" lg="8">
                     <b-form-group class="text-center">
                         <label for="nome-beneficiario">Nome</label>
                         <b-input-group>
@@ -38,36 +38,7 @@
                         </div>
                     </b-form-group>
                 </b-col>
-                <b-col sm="12" md="6" lg="3">
-                    <b-form-group class="text-center">
-                        <label for="email-beneficiario">E-mail</label>
-                        <b-input-group>
-                            <!-- Email -->
-                            <b-form-input id="email-beneficiario"
-                                          placeholder="joao.almeida@email.com"
-                                          v-model="formPagamentoCC.informacoesBeneficiario.email"
-                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"
-                                          @focus="setDirty"
-                                          autocomplete="new-password"
-                                          class="text-center">
-                            </b-form-input>
-                            <b-input-group-append>
-                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.email.dirty">
-                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioEmailValido"></i>
-                                    <i class="fa fa-times fa-fw red" v-else></i>
-                                </div>
-                                <div v-else>
-                                    <i class="fa fa-exclamation-triangle fa-fw"></i>
-                                </div>
-                            </b-input-group-append>
-                        </b-input-group>
-                        <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioEmailDirty && !isBeneficiarioEmailValido ? 'block' : 'none' }">
-                            <div v-if="isBeneficiarioEmailNaoInformado">Informe o e-mail</div>
-                            <div v-if="isBeneficiarioEmailInvalido">Informe um e-mail válido</div>
-                        </div>
-                    </b-form-group>
-                </b-col>
-                <b-col sm="12" md="6" lg="3">
+                <b-col>
                     <b-form-group class="text-center">
                         <label for="telefone-beneficiario">Telefone</label>
                         <b-input-group>
@@ -96,7 +67,38 @@
                         </b-input-group>
                     </b-form-group>
                 </b-col>
-                <b-col sm="12" md="6" lg="3">
+            </b-row>
+            <b-row>
+                <b-col cols="12" lg="8">
+                    <b-form-group class="text-center">
+                        <label for="email-beneficiario">E-mail</label>
+                        <b-input-group>
+                            <!-- Email -->
+                            <b-form-input id="email-beneficiario"
+                                          placeholder="joao.almeida@email.com"
+                                          v-model="formPagamentoCC.informacoesBeneficiario.email"
+                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"
+                                          @focus="setDirty"
+                                          autocomplete="new-password"
+                                          class="text-center">
+                            </b-form-input>
+                            <b-input-group-append>
+                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.email.dirty">
+                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioEmailValido"></i>
+                                    <i class="fa fa-times fa-fw red" v-else></i>
+                                </div>
+                                <div v-else>
+                                    <i class="fa fa-exclamation-triangle fa-fw"></i>
+                                </div>
+                            </b-input-group-append>
+                        </b-input-group>
+                        <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioEmailDirty && !isBeneficiarioEmailValido ? 'block' : 'none' }">
+                            <div v-if="isBeneficiarioEmailNaoInformado">Informe o e-mail</div>
+                            <div v-if="isBeneficiarioEmailInvalido">Informe um e-mail válido</div>
+                        </div>
+                    </b-form-group>
+                </b-col>
+                <b-col>
                     <b-form-group class="text-center">
                         <label for="data-nascimento-beneficiario">Data de Nascimento</label>
                         <b-input-group>
@@ -126,6 +128,124 @@
                     </b-form-group>
                 </b-col>
             </b-row>
+<!--            <b-row class="mb-4">-->
+<!--                <b-col sm="12" md="6" lg="3">-->
+<!--                    <b-form-group class="text-center">-->
+<!--                        <label for="nome-beneficiario">Nome</label>-->
+<!--                        <b-input-group>-->
+<!--                            &lt;!&ndash; Nome &ndash;&gt;-->
+<!--                            <b-form-input id="nome-beneficiario"-->
+<!--                                          placeholder="João Antônio Almeida"-->
+<!--                                          v-model="formPagamentoCC.informacoesBeneficiario.nome"-->
+<!--                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.nome, 'nome-beneficiario')"-->
+<!--                                          @focus="setDirty"-->
+<!--                                          v-mask="customTokens"-->
+<!--                                          autocomplete="new-password"-->
+<!--                                          class="text-center">-->
+<!--                            </b-form-input>-->
+<!--                            <b-input-group-append>-->
+<!--                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.nome.dirty">-->
+<!--                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioNomeValido"></i>-->
+<!--                                    <i class="fa fa-times fa-fw red" v-else></i>-->
+<!--                                </div>-->
+<!--                                <div v-else>-->
+<!--                                    <i class="fa fa-exclamation-triangle fa-fw"></i>-->
+<!--                                </div>-->
+<!--                            </b-input-group-append>-->
+<!--                        </b-input-group>-->
+<!--                        <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioNomeDirty && !isBeneficiarioNomeValido ? 'block' : 'none' }">-->
+<!--                            <div v-if="isBeneficiarioNomeNaoInformado">Informe o nome</div>-->
+<!--                        </div>-->
+<!--                    </b-form-group>-->
+<!--                </b-col>-->
+<!--                <b-col sm="12" md="6" lg="3">-->
+<!--                    <b-form-group class="text-center">-->
+<!--                        <label for="email-beneficiario">E-mail</label>-->
+<!--                        <b-input-group>-->
+<!--                            &lt;!&ndash; Email &ndash;&gt;-->
+<!--                            <b-form-input id="email-beneficiario"-->
+<!--                                          placeholder="joao.almeida@email.com"-->
+<!--                                          v-model="formPagamentoCC.informacoesBeneficiario.email"-->
+<!--                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"-->
+<!--                                          @focus="setDirty"-->
+<!--                                          autocomplete="new-password"-->
+<!--                                          class="text-center">-->
+<!--                            </b-form-input>-->
+<!--                            <b-input-group-append>-->
+<!--                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.email.dirty">-->
+<!--                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioEmailValido"></i>-->
+<!--                                    <i class="fa fa-times fa-fw red" v-else></i>-->
+<!--                                </div>-->
+<!--                                <div v-else>-->
+<!--                                    <i class="fa fa-exclamation-triangle fa-fw"></i>-->
+<!--                                </div>-->
+<!--                            </b-input-group-append>-->
+<!--                        </b-input-group>-->
+<!--                        <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioEmailDirty && !isBeneficiarioEmailValido ? 'block' : 'none' }">-->
+<!--                            <div v-if="isBeneficiarioEmailNaoInformado">Informe o e-mail</div>-->
+<!--                            <div v-if="isBeneficiarioEmailInvalido">Informe um e-mail válido</div>-->
+<!--                        </div>-->
+<!--                    </b-form-group>-->
+<!--                </b-col>-->
+<!--                <b-col sm="12" md="6" lg="3">-->
+<!--                    <b-form-group class="text-center">-->
+<!--                        <label for="telefone-beneficiario">Telefone</label>-->
+<!--                        <b-input-group>-->
+<!--                            &lt;!&ndash; Telefone &ndash;&gt;-->
+<!--                            <b-form-input id="telefone-beneficiario"-->
+<!--                                          placeholder="(00) 00000-0000"-->
+<!--                                          v-model="formPagamentoCC.informacoesBeneficiario.telefone"-->
+<!--                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.telefone, 'telefone-beneficiario')"-->
+<!--                                          @focus="setDirty"-->
+<!--                                          autocomplete="new-password"-->
+<!--                                          v-mask="['(##) ####-####', '(##) #####-####']"-->
+<!--                                          class="text-center"></b-form-input>-->
+<!--                            <b-input-group-append>-->
+<!--                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty">-->
+<!--                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioTelefoneValido"></i>-->
+<!--                                    <i class="fa fa-times fa-fw red" v-else></i>-->
+<!--                                </div>-->
+<!--                                <div v-else>-->
+<!--                                    <i class="fa fa-exclamation-triangle fa-fw"></i>-->
+<!--                                </div>-->
+<!--                            </b-input-group-append>-->
+<!--                            <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioTelefoneDirty && !isBeneficiarioTelefoneValido ? 'block' : 'none' }">-->
+<!--                                <div v-if="isBeneficiarioTelefoneNaoInformado">Informe o telefone</div>-->
+<!--                                <div v-if="isBeneficiarioTelefoneInvalido">O telefone deve conter no mínimo 10 caracteres</div>-->
+<!--                            </div>-->
+<!--                        </b-input-group>-->
+<!--                    </b-form-group>-->
+<!--                </b-col>-->
+<!--                <b-col sm="12" md="6" lg="3">-->
+<!--                    <b-form-group class="text-center">-->
+<!--                        <label for="data-nascimento-beneficiario">Data de Nascimento</label>-->
+<!--                        <b-input-group>-->
+<!--                            &lt;!&ndash; Data de Nascimento &ndash;&gt;-->
+<!--                            <b-form-input id="data-nascimento-beneficiario"-->
+<!--                                          placeholder="00/00/0000"-->
+<!--                                          v-model="formPagamentoCC.informacoesBeneficiario.dataNascimento"-->
+<!--                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.dataNascimento, 'data-nascimento-beneficiario')"-->
+<!--                                          @focus="setDirty"-->
+<!--                                          autocomplete="new-password"-->
+<!--                                          v-mask="'##/##/####'"-->
+<!--                                          class="text-center"></b-form-input>-->
+<!--                            <b-input-group-append>-->
+<!--                                <div v-if="formPagamentoCC.validations.informacoesBeneficiario.dataNascimento.dirty">-->
+<!--                                    <i class="fa fa-check fa-fw green" v-if="isBeneficiarioDataNascimentoValido"></i>-->
+<!--                                    <i class="fa fa-times fa-fw red" v-else></i>-->
+<!--                                </div>-->
+<!--                                <div v-else>-->
+<!--                                    <i class="fa fa-exclamation-triangle fa-fw"></i>-->
+<!--                                </div>-->
+<!--                            </b-input-group-append>-->
+<!--                            <div class="text-left invalid-feedback" :style="{ display: isBeneficiarioDataNascimentoDirty && !isBeneficiarioDataNascimentoValido ? 'block' : 'none' }">-->
+<!--                                <div v-if="isBeneficiarioDataNascimentoNaoInformado">Informe a data de nascimento</div>-->
+<!--                                <div v-if="isBeneficiarioDataNascimentoInvalido">Data de nascimento inválida</div>-->
+<!--                            </div>-->
+<!--                        </b-input-group>-->
+<!--                    </b-form-group>-->
+<!--                </b-col>-->
+<!--            </b-row>-->
             <br>
             <b-row>
                 <b-col class="text-center">
