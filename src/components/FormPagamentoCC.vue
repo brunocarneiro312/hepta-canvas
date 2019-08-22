@@ -14,15 +14,15 @@
                         <label for="nome-beneficiario">Nome</label>
                         <b-input-group>
                             <!-- Nome -->
-                            <b-form-input id="nome-beneficiario"
-                                          placeholder="João Antônio Almeida"
-                                          v-model="formPagamentoCC.informacoesBeneficiario.nome"
-                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.nome, 'nome-beneficiario')"
-                                          @focus="setDirty"
-                                          v-mask="customTokens"
-                                          autocomplete="new-password"
-                                          class="text-center">
-                            </b-form-input>
+                            <input id="nome-beneficiario"
+                                   placeholder="João Antônio Almeida"
+                                   v-model.lazy="formPagamentoCC.informacoesBeneficiario.nome"
+                                   @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.nome, 'nome-beneficiario')"
+                                   @focus="setDirty"
+                                   v-mask="customTokens"
+                                   autocomplete="new-password"
+                                   class="form-control text-center">
+                            </input>
                             <b-input-group-append>
                                 <div v-if="formPagamentoCC.validations.informacoesBeneficiario.nome.dirty">
                                     <i class="fa fa-check fa-fw green" v-if="isBeneficiarioNomeValido"></i>
@@ -43,14 +43,14 @@
                         <label for="telefone-beneficiario">Telefone</label>
                         <b-input-group>
                             <!-- Telefone -->
-                            <b-form-input id="telefone-beneficiario"
+                            <input id="telefone-beneficiario"
                                           placeholder="(00) 00000-0000"
-                                          v-model="formPagamentoCC.informacoesBeneficiario.telefone"
+                                          v-model.lazy="formPagamentoCC.informacoesBeneficiario.telefone"
                                           @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.telefone, 'telefone-beneficiario')"
                                           @focus="setDirty"
                                           autocomplete="new-password"
                                           v-mask="['(##) ####-####', '(##) #####-####']"
-                                          class="text-center"></b-form-input>
+                                          class="form-control text-center"></input>
                             <b-input-group-append>
                                 <div v-if="formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty">
                                     <i class="fa fa-check fa-fw green" v-if="isBeneficiarioTelefoneValido"></i>
@@ -74,14 +74,14 @@
                         <label for="email-beneficiario">E-mail</label>
                         <b-input-group>
                             <!-- Email -->
-                            <b-form-input id="email-beneficiario"
+                            <input id="email-beneficiario"
                                           placeholder="joao.almeida@email.com"
-                                          v-model="formPagamentoCC.informacoesBeneficiario.email"
+                                          v-model.lazy="formPagamentoCC.informacoesBeneficiario.email"
                                           @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"
                                           @focus="setDirty"
                                           autocomplete="new-password"
-                                          class="text-center">
-                            </b-form-input>
+                                          class="form-control text-center">
+                            </input>
                             <b-input-group-append>
                                 <div v-if="formPagamentoCC.validations.informacoesBeneficiario.email.dirty">
                                     <i class="fa fa-check fa-fw green" v-if="isBeneficiarioEmailValido"></i>
@@ -103,14 +103,14 @@
                         <label for="data-nascimento-beneficiario">Data de Nascimento</label>
                         <b-input-group>
                             <!-- Data de Nascimento -->
-                            <b-form-input id="data-nascimento-beneficiario"
-                                          placeholder="00/00/0000"
-                                          v-model="formPagamentoCC.informacoesBeneficiario.dataNascimento"
-                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.dataNascimento, 'data-nascimento-beneficiario')"
-                                          @focus="setDirty"
-                                          autocomplete="new-password"
-                                          v-mask="'##/##/####'"
-                                          class="text-center"></b-form-input>
+                            <input id="data-nascimento-beneficiario"
+                                   placeholder="00/00/0000"
+                                   v-model.lazy="formPagamentoCC.informacoesBeneficiario.dataNascimento"
+                                   @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.dataNascimento, 'data-nascimento-beneficiario')"
+                                   @focus="setDirty"
+                                   autocomplete="new-password"
+                                   v-mask="'##/##/####'"
+                                   class="form-control text-center"></input>
                             <b-input-group-append>
                                 <div v-if="formPagamentoCC.validations.informacoesBeneficiario.dataNascimento.dirty">
                                     <i class="fa fa-check fa-fw green" v-if="isBeneficiarioDataNascimentoValido"></i>
@@ -144,14 +144,14 @@
                                 <label for="numero-cartao-beneficiario">Número do Cartão</label>
                                 <b-input-group>
                                     <!-- Número do cartão -->
-                                    <b-form-input id="numero-cartao-beneficiario"
-                                                  placeholder="0000 0000 0000 0000"
-                                                  v-model="formPagamentoCC.dadosCartaoCredito.numeroCartao"
-                                                  @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.numeroCartao, 'numero-cartao-beneficiario')"
-                                                  @focus="setDirty"
-                                                  autocomplete="new-password"
-                                                  v-mask="'#### #### #### ####'"
-                                                  class="text-center font-inconsolata"></b-form-input>
+                                    <input id="numero-cartao-beneficiario"
+                                           placeholder="0000 0000 0000 0000"
+                                           v-model="formPagamentoCC.dadosCartaoCredito.numeroCartao"
+                                           @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.numeroCartao, 'numero-cartao-beneficiario')"
+                                           @focus="setDirty"
+                                           autocomplete="new-password"
+                                           v-mask="'#### #### #### ####'"
+                                           class="form-control text-center font-inconsolata"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.numeroCartao.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isNumeroCartaoCreditoValido"></i>
@@ -172,13 +172,13 @@
                                 <label for="nome-cartao-beneficiario">Nome no Cartão</label>
                                 <b-input-group>
                                     <!-- Nome no cartão -->
-                                    <b-form-input id="nome-cartao-beneficiario"
-                                                  placeholder="José Antônio Almeida"
-                                                  v-model="formPagamentoCC.dadosCartaoCredito.nomeImpresso"
-                                                  @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso, 'nome-cartao-beneficiario')"
-                                                  @focus="setDirty"
-                                                  v-mask="customTokens"
-                                                  class="text-center"></b-form-input>
+                                    <input id="nome-cartao-beneficiario"
+                                           placeholder="José Antônio Almeida"
+                                           v-model="formPagamentoCC.dadosCartaoCredito.nomeImpresso"
+                                           @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso, 'nome-cartao-beneficiario')"
+                                           @focus="setDirty"
+                                           v-mask="customTokens"
+                                           class="form-control text-center"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.nomeImpresso.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isNomeCartaoCreditoValido"></i>
@@ -201,13 +201,13 @@
                                 <label for="validade-cartao-beneficiario">Validade</label>
                                 <b-input-group>
                                     <!-- Validade do cartão -->
-                                    <b-form-input id="validade-cartao-beneficiario"
-                                                  placeholder="00/0000"
-                                                  v-model="formPagamentoCC.dadosCartaoCredito.validade"
-                                                  @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.validade, 'validade-cartao-beneficiario')"
-                                                  @focus="setDirty"
-                                                  v-mask="'##/####'"
-                                                  class="text-center font-inconsolata"></b-form-input>
+                                    <input id="validade-cartao-beneficiario"
+                                           placeholder="00/0000"
+                                           v-model="formPagamentoCC.dadosCartaoCredito.validade"
+                                           @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.validade, 'validade-cartao-beneficiario')"
+                                           @focus="setDirty"
+                                           v-mask="'##/####'"
+                                           class="form-control text-center font-inconsolata"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.validade.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isValidadeCartaoCreditoValido"></i>
@@ -225,16 +225,17 @@
                         </b-col>
                         <b-col cols="12" sm="6" md="3">
                             <b-form-group class="text-center">
-                                <label for="cvv-cartao-beneficiario">CVV</label>
+                                <label for="cvv-cartao-beneficiario">CVC</label>
                                 <b-input-group>
                                     <!-- CVV do cartão -->
-                                    <b-input id="cvv-cartao-beneficiario"
-                                             placeholder="000"
-                                             v-model="formPagamentoCC.dadosCartaoCredito.cvv"
-                                             @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cvv, 'cvv-cartao-beneficiario');flipCard()"
-                                             @focus="setDirty;flipCard()"
-                                             v-mask="'###'"
-                                             class="text-center font-inconsolata"></b-input>
+                                    <input id="cvv-cartao-beneficiario"
+                                           placeholder="000"
+                                           v-model="formPagamentoCC.dadosCartaoCredito.cvv"
+                                           @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cvv, 'cvv-cartao-beneficiario');flipCard()"
+                                           @focus="setDirty;flipCard()"
+                                           v-mask="'###'"
+                                           class="form-control text-center font-inconsolata">
+                                    </input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.cvv.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isCVVCartaoCreditoValido"></i>
@@ -255,13 +256,13 @@
                                 <label for="cpf-cartao-beneficiario">CPF do Titular</label>
                                 <b-input-group>
                                     <!-- CPF do titular -->
-                                    <b-input id="cpf-cartao-beneficiario"
-                                             placeholder="000.000.000-00"
-                                             v-model="formPagamentoCC.dadosCartaoCredito.cpfTitular"
-                                             @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cpfTitular, 'cpf-cartao-beneficiario')"
-                                             @focus="setDirty"
-                                             v-mask="'###.###.###-##'"
-                                             class="text-center"></b-input>
+                                    <input id="cpf-cartao-beneficiario"
+                                           placeholder="000.000.000-00"
+                                           v-model.lazy="formPagamentoCC.dadosCartaoCredito.cpfTitular"
+                                           @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cpfTitular, 'cpf-cartao-beneficiario')"
+                                           @focus="setDirty"
+                                           v-mask="'###.###.###-##'"
+                                           class="form-control text-center"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isCPFCartaoCreditoValido"></i>
@@ -306,13 +307,13 @@
                                 <label for="cep-beneficiario">CEP</label>
                                 <b-input-group>
                                     <!-- CEP -->
-                                    <b-input id="cep-beneficiario"
-                                             placeholder="70390-700"
-                                             v-model="formPagamentoCC.endereco.cep"
-                                             @blur="setFormClass(formPagamentoCC.validations.endereco.cep, 'cep-beneficiario'); requestCEP()"
-                                             @focus="setDirty"
-                                             v-mask="'#####-###'"
-                                             class="text-center"></b-input>
+                                    <input id="cep-beneficiario"
+                                           placeholder="70390-700"
+                                           v-model.lazy="formPagamentoCC.endereco.cep"
+                                           @blur="setFormClass(formPagamentoCC.validations.endereco.cep, 'cep-beneficiario'); requestCEP()"
+                                           @focus="setDirty"
+                                           v-mask="'#####-###'"
+                                           class="form-control text-center"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.endereco.cep.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isEnderecoCEPValido"></i>
@@ -333,12 +334,12 @@
                                 <label for="logradouro-beneficiario">Logradouro</label>
                                 <b-input-group>
                                     <!-- Logradouro -->
-                                    <b-input id="logradouro-beneficiario"
-                                             placeholder="Q SHLS, 716, Conj B Bloco 5"
-                                             v-model="formPagamentoCC.endereco.logradouro"
-                                             @blur="setFormClass(formPagamentoCC.validations.endereco.logradouro, 'logradouro-beneficiario')"
-                                             @focus="setDirty"
-                                             class="text-center"></b-input>
+                                    <input id="logradouro-beneficiario"
+                                           placeholder="Q SHLS, 716, Conj B Bloco 5"
+                                           v-model.lazy="formPagamentoCC.endereco.logradouro"
+                                           @blur="setFormClass(formPagamentoCC.validations.endereco.logradouro, 'logradouro-beneficiario')"
+                                           @focus="setDirty"
+                                           class="form-control text-center"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.endereco.logradouro.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isEnderecoLogradouroValido"></i>
@@ -359,12 +360,12 @@
                                 <label for="bairro-beneficiario">Bairro</label>
                                 <b-input-group>
                                     <!-- Bairro -->
-                                    <b-input id="bairro-beneficiario"
-                                             placeholder="Asa Sul"
-                                             v-model="formPagamentoCC.endereco.bairro"
-                                             @blur="setFormClass(formPagamentoCC.validations.endereco.bairro, 'bairro-beneficiario')"
-                                             @focus="setDirty"
-                                             class="text-center"></b-input>
+                                    <input id="bairro-beneficiario"
+                                           placeholder="Asa Sul"
+                                           v-model.lazy="formPagamentoCC.endereco.bairro"
+                                           @blur="setFormClass(formPagamentoCC.validations.endereco.bairro, 'bairro-beneficiario')"
+                                           @focus="setDirty"
+                                           class="form-control text-center"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.endereco.bairro.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isEnderecoBairroValido"></i>
@@ -385,13 +386,14 @@
                                 <label for="uf-beneficiario">UF</label>
                                 <b-input-group>
                                     <!-- UF -->
-                                    <b-input id="uf-beneficiario"
-                                             placeholder="DF"
-                                             v-model="formPagamentoCC.endereco.uf"
-                                             @blur="setFormClass(formPagamentoCC.validations.endereco.uf, 'uf-beneficiario')"
-                                             @focus="setDirty"
-                                             v-mask="'SS'"
-                                             class="text-center"></b-input>
+                                    <input id="uf-beneficiario"
+                                           placeholder="DF"
+                                           v-model.lazy="formPagamentoCC.endereco.uf"
+                                           @blur="setFormClass(formPagamentoCC.validations.endereco.uf, 'uf-beneficiario')"
+                                           @focus="setDirty"
+                                           v-mask="'SS'"
+                                           class="form-control text-center">
+                                    </input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.endereco.uf.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isEnderecoUFValido"></i>
@@ -414,12 +416,12 @@
                                 <label for="localidade-beneficiario">Cidade</label>
                                 <b-input-group>
                                     <!-- Cidade -->
-                                    <b-input id="localidade-beneficiario"
-                                             placeholder="Brasília"
-                                             v-model="formPagamentoCC.endereco.cidade"
-                                             @blur="setFormClass(formPagamentoCC.validations.endereco.cidade, 'localidade-beneficiario')"
-                                             @focus="setDirty"
-                                             class="text-center"></b-input>
+                                    <input id="localidade-beneficiario"
+                                           placeholder="Brasília"
+                                           v-model.lazy="formPagamentoCC.endereco.cidade"
+                                           @blur="setFormClass(formPagamentoCC.validations.endereco.cidade, 'localidade-beneficiario')"
+                                           @focus="setDirty"
+                                           class="form-control text-center"></input>
                                     <b-input-group-append>
                                         <div v-if="formPagamentoCC.validations.endereco.cidade.dirty">
                                             <i class="fa fa-check fa-fw green" v-if="isEnderecoCidadeValido"></i>
@@ -440,14 +442,14 @@
                                 <label for="complemento-beneficiario">Complemento</label>
                                 <b-input-group>
                                     <!-- Complemento -->
-                                    <b-input id="complemento-beneficiario"
-                                             placeholder="Sala 704"
-                                             v-model="formPagamentoCC.endereco.complemento"
-                                             @blur="setFormClass(formPagamentoCC.validations.endereco.complemento, 'complemento-beneficiario')"
-                                             @focus="setDirty"
-                                             style="border: 1px solid #ddd"
-                                             class="text-center">
-                                    </b-input>
+                                    <input id="complemento-beneficiario"
+                                           placeholder="Sala 704"
+                                           v-model.lazy="formPagamentoCC.endereco.complemento"
+                                           @blur="setFormClass(formPagamentoCC.validations.endereco.complemento, 'complemento-beneficiario')"
+                                           @focus="setDirty"
+                                           style="border: 1px solid #ddd"
+                                           class="form-control text-center">
+                                    </input>
                                 </b-input-group>
                             </b-form-group>
                         </b-col>

@@ -83,7 +83,7 @@
                                 <div class="tiny-text text-center mr-3">
                                     <b-row>
                                         <b-col offset="10">
-                                            <b>CVV</b>
+                                            <b>CVC</b>
                                         </b-col>
                                     </b-row>
                                 </div>
