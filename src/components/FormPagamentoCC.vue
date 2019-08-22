@@ -232,7 +232,7 @@
                                            placeholder="000"
                                            v-model="formPagamentoCC.dadosCartaoCredito.cvv"
                                            @blur="setFormClass(formPagamentoCC.validations.dadosCartaoCredito.cvv, 'cvv-cartao-beneficiario');flipCard()"
-                                           @focus="setDirty;flipCard()"
+                                           @focus="setDirty"
                                            v-mask="'###'"
                                            class="form-control text-center font-inconsolata">
                                     </input>
@@ -651,6 +651,7 @@
                         break;
                     case 'cvv-cartao-beneficiario':
                         this.formPagamentoCC.validations.dadosCartaoCredito.cvv.dirty = true;
+                        this.flipCard();
                         break;
                     case 'cpf-cartao-beneficiario':
                         this.formPagamentoCC.validations.dadosCartaoCredito.cpfTitular.dirty = true;
