@@ -463,6 +463,7 @@
                     <b-btn variant="success"
                            class="btn-lg font-condensed"
                            :disabled="!isFormValid"
+                           @click="realizarPagamento"
                            block>
                         Confirmar <i class="fa fa-check fa-fw"></i>
                     </b-btn>
@@ -483,14 +484,26 @@
         components: {
             VisualCard,
         },
+        /**
+         * -----------------
+         * L I F E C Y C L E
+         * -----------------
+         */
         beforeCreate: function() {
+
         },
         beforeMount: function() {
             this.regexService = new RegexpService();
             this.viacepService = new ViacepService();
         },
         mounted: function() {
+
         },
+        /**
+         * -------
+         * D A T A
+         * -------
+         */
         data: function() {
             return {
                 // Referência à serviços externos
@@ -619,6 +632,11 @@
                 },
             }
         },
+        /**
+         * -------------
+         * M E T H O D S
+         * -------------
+         */
         methods: {
             /**
              * -------------------------------------------------
@@ -791,8 +809,53 @@
             },
             flipCard() {
                 this.isCardFlipped = !this.isCardFlipped;
-            }
+            },
+            /**
+             * -----------------------------------------------------------------------
+             * Realiza todos os procedimentos necessários para se efetuar um pagamento
+             * -----------------------------------------------------------------------
+             */
+            realizarPagamento() {
+                console.log('realizando pagamento...');
+            },
+            /**
+             * ----------------------------
+             * Obtém sessão com o PagSeguro
+             * ----------------------------
+             */
+            getSessionId() {
+
+            },
+            /**
+             * -----------------------------------
+             * Dispara requisição para o PagSeguro
+             * -----------------------------------
+             */
+            onSenderHashReady() {
+
+            },
+            /**
+             * -----------
+             * Obtém brand
+             * -----------
+             */
+            getBrand() {
+
+            },
+            /**
+             * --------------
+             * Cria cardToken
+             * --------------
+             */
+            createCardToken() {
+
+            },
         },
+        /**
+         * ---------------
+         * C O M P U T E D
+         * ---------------
+         */
         computed: {
             // Verifica se o nome está válido
             isBeneficiarioNomeValido: function() {
