@@ -44,13 +44,13 @@
                         <b-input-group>
                             <!-- Telefone -->
                             <input id="telefone-beneficiario"
-                                          placeholder="(00) 00000-0000"
-                                          v-model.lazy="formPagamentoCC.informacoesBeneficiario.telefone"
-                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.telefone, 'telefone-beneficiario')"
-                                          @focus="setDirty"
-                                          autocomplete="new-password"
-                                          v-mask="['(##) ####-####', '(##) #####-####']"
-                                          class="form-control text-center"></input>
+                                   placeholder="(00) 00000-0000"
+                                   v-model.lazy="formPagamentoCC.informacoesBeneficiario.telefone"
+                                   @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.telefone, 'telefone-beneficiario')"
+                                   @focus="setDirty"
+                                   autocomplete="new-password"
+                                   v-mask="['(##) ####-####', '(##) #####-####']"
+                                   class="form-control text-center"></input>
                             <b-input-group-append>
                                 <div v-if="formPagamentoCC.validations.informacoesBeneficiario.telefone.dirty">
                                     <i class="fa fa-check fa-fw green" v-if="isBeneficiarioTelefoneValido"></i>
@@ -75,12 +75,12 @@
                         <b-input-group>
                             <!-- Email -->
                             <input id="email-beneficiario"
-                                          placeholder="joao.almeida@email.com"
-                                          v-model.lazy="formPagamentoCC.informacoesBeneficiario.email"
-                                          @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"
-                                          @focus="setDirty"
-                                          autocomplete="new-password"
-                                          class="form-control text-center">
+                                   placeholder="joao.almeida@email.com"
+                                   v-model.lazy="formPagamentoCC.informacoesBeneficiario.email"
+                                   @blur="setFormClass(formPagamentoCC.validations.informacoesBeneficiario.email, 'email-beneficiario')"
+                                   @focus="setDirty"
+                                   autocomplete="new-password"
+                                   class="form-control text-center">
                             </input>
                             <b-input-group-append>
                                 <div v-if="formPagamentoCC.validations.informacoesBeneficiario.email.dirty">
@@ -477,6 +477,9 @@
 
     import { ViacepService } from '../assets/js/viacep.service';
     import { RegexpService } from '../assets/js/regexp.service';
+
+    import axios from 'axios';
+
     import VisualCard from "./VisualCard";
 
     export default {
@@ -630,6 +633,15 @@
                         }
                     }
                 },
+                // Dados do PagSeguro
+                pagseguro: {
+                    sessionId: undefined,
+                    error: {
+                        statusCode: undefined,
+                        message: undefined,
+                        detail: undefined,
+                    }
+                }
             }
         },
         /**
@@ -816,7 +828,7 @@
              * -----------------------------------------------------------------------
              */
             realizarPagamento() {
-                console.log('realizando pagamento...');
+                this.getSessionId();
             },
             /**
              * ----------------------------
@@ -824,7 +836,16 @@
              * ----------------------------
              */
             getSessionId() {
-
+                const vm = this;
+                axios.get('')
+                  .then(function(response) {
+                      vm.pagseguro.sessionId = response.data;
+                      PagSeguroDirectPayment.setSessionId(vm.pagseguro.sessionId);
+                  })
+                  .catch(function(error) {
+                      vm.pagseguro.error.message('Não foi possível estabelecer uma sessão com o PagSeguro.');
+                      vm.pagseguro.error.detail(error);
+                  });
             },
             /**
              * -----------------------------------
@@ -832,7 +853,8 @@
              * -----------------------------------
              */
             onSenderHashReady() {
-
+                const vm = this;
+                this.getBrand();
             },
             /**
              * -----------
@@ -840,16 +862,91 @@
              * -----------
              */
             getBrand() {
-
+                const vm = this;
+                let dadosDaCompra = {
+                    cardBin: undefined,
+                    success: function(response) {
+                        let brand = response;
+                        this.createCardToken(brand);
+                    }
+                };
+                PagSeguroDirectPayment.getBrand(dadosDaCompra);
             },
             /**
              * --------------
              * Cria cardToken
              * --------------
              */
-            createCardToken() {
+            createCardToken(brand) {
+                const vm = this;
+
+                let dadosDaCompra = {
+                    cardNumber: undefined,
+                    brand: brand,
+                    cvv: undefined,
+                    expirationMonth: undefined,
+                    expirationYear: undefined,
+                    success: function(response) {
+
+                    },
+                    error: function(error) {
+
+                    },
+                    complete: function(response) {
+
+                    }
+                };
+
+                PagSeguroDirectPayment.createCardToken(dadosDaCompra)
+            },
+            /**
+             * --------------------------------------------------------------------
+             * Função de callback do PagSeguro caso a brand seja obtida com sucesso
+             * --------------------------------------------------------------------
+             */
+            getBrandSuccessCallback(response) {
 
             },
+            /**
+             * ------------------------------------------------------------------------
+             * Função de callback do PagSeguro caso haja erro durante obtenção da brand
+             * ------------------------------------------------------------------------
+             */
+            getBrandErrorCallback(error) {
+
+            },
+            /**
+             * ----------------------------------------------------------------
+             * Função de callback do PagSeguro após requisição para obter brand
+             * ----------------------------------------------------------------
+             */
+            getBrandCompleteCallback(response) {
+
+            },
+            /**
+             * --------------------------------------------------
+             * Função de callback do PagSeguro no caso de sucesso
+             * --------------------------------------------------
+             */
+            createCardTokenSuccessCallback(response) {
+
+            },
+            /**
+             * -----------------------------------------------
+             * Função de callback do PagSeguro no caso de erro
+             * -----------------------------------------------
+             */
+            createCardTokenErrorCallback(error) {
+
+            },
+            /**
+             * ---------------------------------------------------------
+             * Função de callback do PagSeguro após completar requisição
+             * ---------------------------------------------------------
+             */
+            createCardTokenCompleteCallback(response) {
+
+            }
         },
         /**
          * ---------------
